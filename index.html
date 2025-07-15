@@ -232,7 +232,7 @@
             let more_mult = 1.0;
             let miss_chance = 0.0;
             for (let i of equipped){
-                if (i.name == "Common Dagger") dmg += 2;
+                if (i.name == "Common Dagger") dmg += 3;
                 if (i.name == "Ring of Slaying") dmg += 1;
                 if (i.name == "Epic Sword") dmg += 7;
                 if (i.name == "Fearsome Kris") dmg += 8;
@@ -272,7 +272,7 @@
                 if (i.name == "Tooth Necklace") dmg += 6;
                 if (i.name == "Killer Gloves") dmg_mult += 0.03;
                 if (i.name == "Blasting Wand") dmg += 10;
-                
+
             }
 
             dmg = set_base == -1 ? dmg : set_base;
