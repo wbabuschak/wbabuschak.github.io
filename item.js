@@ -17,7 +17,7 @@ class Item{
             case "Epic Sword":
                 return new Item(name,quantity,"weapon","+7 dmg");
             case "Common Dagger":
-                return new Item(name,quantity,"weapon","+2 dmg");
+                return new Item(name,quantity,"weapon","+3 dmg");
             case "Spectral Cowl":
                 return new Item(name,quantity,"head","access to spirit world");
             case "Dirty Shoes":
