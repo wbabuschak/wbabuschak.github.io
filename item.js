@@ -54,6 +54,8 @@ class Item{
                 return new Item(name,quantity,"weapon","66% dmg");
             case "Stone of Michael":
                 return new Item(name,quantity,"finger","1.1x dmg");
+            case "Killer Gloves":
+                return new Item(name,quantity,"hands","3% dmg");
             default:
                 return new Item(name,quantity);
         }
