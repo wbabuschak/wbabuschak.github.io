@@ -49,7 +49,7 @@ class Item{
             case "Promise Ring":
                 return new Item(name,quantity,"feet","does nothing (what a tease...)");
             case "Wraps of Temptation":
-                return new Item(name,quantity,"chest","13% dmg");
+                return new Item(name,quantity,"chest","23% dmg, 10% chance to miss");
             case "Blade of One Thousand Hooks":
                 return new Item(name,quantity,"weapon","66% dmg");
             case "Stone of Michael":
