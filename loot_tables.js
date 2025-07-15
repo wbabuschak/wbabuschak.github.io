@@ -118,7 +118,7 @@ const sandstoneGolemLootTable = new LootTable([
 );
 
 const blazingBovineLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
@@ -129,7 +129,7 @@ const blazingBovineLootTable = new LootTable([
 );
 
 const infernalInsectLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
@@ -140,7 +140,7 @@ const infernalInsectLootTable = new LootTable([
 );
 
 const sinfulSuccubusLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
@@ -151,7 +151,7 @@ const sinfulSuccubusLootTable = new LootTable([
 );
 
 const fieryFangtoothLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
@@ -162,7 +162,7 @@ const fieryFangtoothLootTable = new LootTable([
 );
 
 const dreadfulDinoLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
@@ -173,7 +173,7 @@ const dreadfulDinoLootTable = new LootTable([
 );
 
 const vileVultureLootTable = new LootTable([
-    Item.createItem("Worn Soul", 6),
+    Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
     Item.createItem("Broken Dream", 6),
     Item.createItem("Shattered Innocence", 6),
