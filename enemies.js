@@ -48,6 +48,36 @@ const ENEMY_DEFS = {
         name: "Sandstone Golem",
         maxHealth: 100,
         lootTable: sandstoneGolemLootTable
+    },
+    "Blazing Bovine": {
+        name: "Blazing Bovine",
+        maxHealth: 666,
+        lootTable: blazingBovineLootTable
+    },
+    "Infernal Insect": {
+        name: "Infernal Insect",
+        maxHealth: 666,
+        lootTable: infernalInsectLootTable
+    },
+    "Sinful Succubus": {
+        name: "Sinful Succubus",
+        maxHealth: 666,
+        lootTable: sinfulSuccubusLootTable
+    },
+    "Fiery Fangtooth": {
+        name: "Fiery Fangtooth",
+        maxHealth: 666,
+        lootTable: fieryFangtoothLootTable
+    },
+    "Dreadful Dino": {
+        name: "Dreadful Dino",
+        maxHealth: 666,
+        lootTable: dreadfulDinoLootTable
+    },
+    "Vile Vulture": {
+        name: "Vile Vulture",
+        maxHealth: 666,
+        lootTable: vileVultureLootTable
     }
 };
 

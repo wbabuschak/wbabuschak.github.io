@@ -7,16 +7,18 @@
     
     <button id="attackButton">Attack!</button>
     <button id="autoButton">RSI Mode</button>
+    <select id="worldSelect"></select>
+    <p></p>
     <button id="equipButton">Equip Item</button>
     <select id="equipSelect"></select>
+    <p></p>
     <button id="unequipButton">Unquip Item</button>
     <select id="unequipSelect"></select>
-    <p></p>
-    <select id="worldSelect"></select>
-
+    
     <p id = "entityDisplay"></p>
-    <p id = "inventory"></p>
     <p id = "equippedItems"></p>
+    <p id = "inventory"></p>
+    
     
     <script src="entity.js"></script>
     <script src="item.js"></script>
@@ -90,6 +92,15 @@
             let goldCoins = inventory.items.find(i => i.name == "Gold Coin");
             if (goldCoins && goldCoins.quantity > 500){
                 worlds.push(2);
+            }
+
+            let hellItem1 = inventory.items.find(i => i.name == "Token of Faith");
+            let hellItem2 = inventory.items.find(i => i.name == "Water Jar");
+            let hellItem3 = inventory.items.find(i => i.name == "Venomous Gland");
+            let hellItem4 = inventory.items.find(i => i.name == "Drained Essense");
+
+            if (hellItem1 && hellItem2 && hellItem3 && hellItem4){
+                worlds.push(3);
             }
             
             for (const world of worlds) {
@@ -183,7 +194,7 @@
         }
 
         function worldName(i){
-            worlds = ["Default World", "Spirit World", "Desert World"];
+            worlds = ["Default World", "Spirit World", "Desert World", "Hell World"];
             return worlds[i];
         }
 
@@ -218,6 +229,8 @@
             let dmg = 1;
             let dmg_mult = 1.0;
             let set_base = -1;
+            let more_mult = 1.0;
+            let miss_chance = 0.0;
             for (let i of equipped){
                 if (i.name == "Common Dagger") dmg += 2;
                 if (i.name == "Ring of Slaying") dmg += 1;
@@ -242,10 +255,43 @@
                     }
                 };
                 if (i.name == "Gauntlets of Sheer Force") set_base = 10;
+                if (i.name == "Emesis Amulet"){
+                    miss_chance += 0.06;
+                    dmg_mult += 0.06;
+                    dmg += 6;
+                }
+                if (i.name == "Crown of the Corpseeater"){
+                    dmg_mult += 0.11;
+                }
+                if (i.name == "Wraps of Temptation"){
+                    dmg_mult += 0.13;
+                }
+                if (i.name == "Wraps of Temptation"){
+                    dmg_mult += 0.13;
+                }
+                if (i.name == "Blade of One Thousand Hooks"){
+                    dmg_mult += 0.66;
+                }
+                if (i.name == "Stone of Michael"){
+                    more_mult += 0.10;
+                }
+                if (i.name == "Treads of Crushing Depths"){
+                    dmg_mult += 0.05;
+                }
+                if (i.name == "Fossil Blade"){
+                    dmg += 20;
+                }
+                if (i.name == "Tooth Necklace"){
+                    dmg += 6;
+                }
+                
             }
 
             dmg = set_base == -1 ? dmg : set_base;
-            return Math.floor(Math.max(0,dmg) * Math.max(0.0,dmg_mult));
+            if (Math.random() < miss_chance){
+                return 0;
+            }
+            return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmg_mult) * Math.max(0.0, more_mult));
         }
 
         function itemInSlot(slot){
@@ -277,6 +323,14 @@
                     enemies.push(spawnEnemy("Bile Spitter"));
                     enemies.push(spawnEnemy("Desert Zealot"));
                     enemies.push(spawnEnemy("Sandstone Golem"));
+                    break;
+                case 3:
+                    enemies.push(spawnEnemy("Blazing Bovine"));
+                    enemies.push(spawnEnemy("Infernal Insect"));
+                    enemies.push(spawnEnemy("Sinful Succubus"));
+                    enemies.push(spawnEnemy("Fiery Fangtooth"));
+                    enemies.push(spawnEnemy("Dreadful Dino"));
+                    enemies.push(spawnEnemy("Vile Vulture"));
                     break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));

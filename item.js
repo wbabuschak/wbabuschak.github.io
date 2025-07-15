@@ -36,6 +36,24 @@ class Item{
                 return new Item(name,quantity,"hands","100% dmg or -100% dmg");
             case "Gauntlets of Sheer Force":
                 return new Item(name,quantity,"hands","base damage is always 10");
+            case "Tooth Necklace":
+                return new Item(name,quantity,"amulet","+6 dmg");
+            case "Fossil Blade":
+                return new Item(name,quantity,"weapon","+20 dmg");
+            case "Treads of Crushing Depths":
+                return new Item(name,quantity,"feet","5% dmg");
+            case "Emesis Amulet":
+                return new Item(name,quantity,"amulet","+6 dmg, 6% dmg, 6% chance to miss");
+            case "Crown of the Corpseeater":
+                return new Item(name,quantity,"head","11% dmg");
+            case "Promise Ring":
+                return new Item(name,quantity,"feet","does nothing (what a tease...)");
+            case "Wraps of Temptation":
+                return new Item(name,quantity,"chest","13% dmg");
+            case "Blade of One Thousand Hooks":
+                return new Item(name,quantity,"weapon","66% dmg");
+            case "Stone of Michael":
+                return new Item(name,quantity,"finger","1.1x dmg");
             default:
                 return new Item(name,quantity);
         }
