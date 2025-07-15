@@ -56,6 +56,8 @@ class Item{
                 return new Item(name,quantity,"finger","1.1x dmg");
             case "Killer Gloves":
                 return new Item(name,quantity,"hands","3% dmg");
+            case "Blasting Wand":
+                return new Item(name,quantity,"weapon","+10 dmg");
             default:
                 return new Item(name,quantity);
         }

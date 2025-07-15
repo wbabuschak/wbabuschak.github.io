@@ -97,8 +97,8 @@ const desertZealotLootTable = new LootTable([
     Item.createItem("Gold Coin", 13),
     Item.createItem("Gold Coin", 23),
     Item.createItem("Gold Coin", 33),
-    Item.createItem("Bead", 9),
-    Item.createItem("Killer Gloves", 9),
+    Item.createItem("Blasting Wand", 1),
+    Item.createItem("Killer Gloves", 1),
     Item.createItem("Water Jar", 1),
     Item.createItem("Stormstrike", 1)
     ],[21,19,17,13,11,7,5,4,2,1]
