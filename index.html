@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.2</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.2</h1>
+    <title>EPIC RPG FIGHT GAME v0.0.2b</title>
+    <h1>EPIC RPG FIGHT GAME v0.0.2b (UI Patch)</h1>
     <p>By William Babuschak</p>
 
     <button id="attackButton">Attack!</button>
+    <p></p>
     <button id="autoButton">RSI Mode</button>
     <select id="worldSelect"></select>
     <button id="resetButton">Reset Save Data</button>
@@ -30,11 +31,18 @@
     <script src="enemies.js"></script>
 
     <style>
-    #resetButton {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
+        #entityDisplay {
+            font-size: 24px;
+        }
+        #attackButton {
+            font-size: 36px;
+            padding: 12px 24px;
+        }
+        #resetButton {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     </style>
 
     <script>
@@ -71,11 +79,11 @@
 
             select.innerHTML = "";
 
-            const equippables = inventory.items.filter(item => item.equippable);
+            const equippables = inventory.items.filter(item => item.equippable).sort((a, b) => a.equippable.localeCompare(b.equippable));
             for (const item of equippables) {
                 let option = document.createElement("option");
                 option.value = item.name;
-                option.text = `${item.name} (${item.quantity})`;
+                option.text = `${item.equippable} - ${item.name} (${item.quantity})`;
                 select.add(option);
             }
 
@@ -95,6 +103,13 @@
             let worlds = [];
             // default world
             worlds.push(0);
+
+            // default world part 2
+            let dirtyShoes = inventory.items.find(i => i.name == "Dirty Shoes");
+            if (dirtyShoes && (dirtyShoes.quantity >= 10 || (dirtyShoes.quantity >= 9 && itemEquipped("Dirty Shoes")))){
+                worlds.push(7);
+            }
+
             // spirit world
             if (itemEquipped("Spectral Cowl") || itemEquipped("Frozen Gemstone Amulet")){
                 worlds.push(1);
@@ -135,6 +150,8 @@
             if (platinumCoins){
                 worlds.push(6);
             }
+
+            
             
             for (const world of worlds) {
                 let option = document.createElement("option");
@@ -160,7 +177,7 @@
             for (const item of equipped) {
                 let option = document.createElement("option");
                 option.value = item.name;
-                option.text = item.name;
+                option.text = item.equippable + " - " + item.name;
                 select.add(option);
             }
 
@@ -171,8 +188,8 @@
             }
         }
 
-        function updateEntityDisplay(){
-            document.getElementById("entityDisplay").innerHTML = activeEntity.name + "<br>" + activeEntity.HP;
+        function updateEntityDisplay(lastHit){
+            document.getElementById("entityDisplay").innerHTML = lastHit == -1 ? activeEntity.name + "<br>" + activeEntity.HP : activeEntity.name + "<br>" + activeEntity.HP + " (-" + lastHit + ")";
         }
 
         function equip(itemName){
@@ -227,7 +244,7 @@
         }
 
         function worldName(i){
-            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World"];
+            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World", "Default World (Part 2)"];
             return worlds[i];
         }
 
@@ -267,15 +284,19 @@
     </script>
 
     <script>
-        // attack button logic
-        document.getElementById("attackButton").addEventListener("click", () => {
-            activeEntity.damage(attackDamage(), inventory);
+        function hit(){
+            let hit = attackDamage();
+            activeEntity.damage(hit, inventory);
             attackCount++;
             if (activeEntity.destroyed){
                 activeEntity = randomEnemy(Number(worldSelect.value));
                 updateInventory();
             } 
-            updateEntityDisplay();
+            updateEntityDisplay(hit);
+        }
+        // attack button logic
+        document.getElementById("attackButton").addEventListener("click", () => {
+            hit();
         });
     </script>
 
@@ -292,7 +313,7 @@
             autoMode = false;
             updateWorldSelect();
             activeEntity = randomEnemy(Number(worldSelect.value));
-            updateEntityDisplay();
+            updateEntityDisplay(-1);
             saveGame();
             loadGame();
         });
@@ -344,7 +365,7 @@
                 }
                 if (i.name == "Blade of One Thousand Hooks") dmg_mult += 0.66;
                 if (i.name == "Stone of Michael") more_mult += 0.10;
-                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.07;
+                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.09;
                 if (i.name == "Fossil Blade") dmg += 20;
                 if (i.name == "Tooth Necklace") dmg += 6;
                 if (i.name == "Killer Gloves") dmg_mult += 0.03;
@@ -395,6 +416,12 @@
                     if (attackCount % 4 == 0) miss_chance += 1000.0;
                 }
                 if (i.name == "Goblin Ledger") dmg_mult += 0.01 * (attackCount % 12);
+                if (i.name == "Skullstompers") dmg += 1;
+                if (i.name == "Devious Dagger"){
+                    dmg += 6;
+                    dmg_mult += 0.16;
+                };
+                if (i.name == "Ratkickers") dmg_mult += .06;
             }
 
             dmg = set_base == -1 ? dmg : set_base;
@@ -464,10 +491,19 @@
                     enemies.push(spawnEnemy("Black Drake"));
                     enemies.push(spawnEnemy("Giant Anaconda"));
                     enemies.push(spawnEnemy("Vainglorious Dragon Hunter"));
+                    break;
                 case 6:
                     enemies.push(spawnEnemy("Boss Goblin"));
                     enemies.push(spawnEnemy("Goblin Loanmaster"));
                     enemies.push(spawnEnemy("Goblin Headcracker"));
+                    enemies.push(spawnEnemy("Gold Goblin Golem"));
+                    break;
+                case 7:
+                    enemies.push(spawnEnemy("Uncommon Bandit"));
+                    enemies.push(spawnEnemy("Filthy Goblin"));
+                    enemies.push(spawnEnemy("Overgrown Vole"));
+                    enemies.push(spawnEnemy("Mysterious Villain"));
+                    break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));
             }
@@ -477,7 +513,7 @@
 
     <script>
         activeEntity = randomEnemy(Number(worldSelect.value));
-        updateEntityDisplay();
+        updateEntityDisplay(-1);
     </script>
 
     <script>
@@ -486,13 +522,7 @@
             if (autoMode){
                 document.getElementById("attackButton").disabled = true;
                 autoInterval = setInterval(() => {
-                    activeEntity.damage(attackDamage(), inventory);
-                    attackCount++;
-                    if (activeEntity.destroyed) {
-                        activeEntity = randomEnemy(Number(worldSelect.value));
-                        updateInventory();
-                    }
-                    updateEntityDisplay();
+                    hit();
                 }, 250);
             } else {
                 document.getElementById("attackButton").disabled = false;

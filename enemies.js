@@ -189,6 +189,26 @@ const ENEMY_DEFS = {
         maxHealth: 700,
         lootTable: goblinHeadcrackerLootTable
     },
+    "Gold Goblin Golem": {
+        name: "Gold Goblin Golem",
+        maxHealth: 3100,
+        lootTable: goldGoblinGolemLootTable
+    },
+    "Uncommon Bandit": {
+        name: "Uncommon Bandit",
+        maxHealth: 30,
+        lootTable: uncommonBanditLootTable
+    },
+    "Overgrown Vole": {
+        name: "Overgrown Vole",
+        maxHealth: 48,
+        lootTable: overgrownVoleLootTable
+    },
+    "Filthy Goblin": {
+        name: "Filthy Goblin",
+        maxHealth: 21,
+        lootTable: filthyGoblinLootTable
+    },
 };
 
 function spawnEnemy(enemyName) {

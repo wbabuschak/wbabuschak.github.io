@@ -373,3 +373,50 @@ const goblinHeadcrackerLootTable = new LootTable([
     Item.createItem("Headcracker Mitts", 1),
     ],[50,39,8,2,1]
 );
+
+const goldGoblinGolemLootTable = new LootTable([
+    Item.createItem("Gold Coin", 2040),
+    Item.createItem("Gold Coin", 2680),
+    Item.createItem("Gold Coin", 3120),
+    Item.createItem("Gold Coin", 3810),
+    Item.createItem("Gold Coin", 4250),
+    Item.createItem("Gold Coin", 4600),
+    Item.createItem("Gold Coin", 6400),
+    Item.createItem("Gold Coin", 9800),
+    ],[50,45,40,35,30,25,10,5]
+);
+
+const uncommonBanditLootTable = new LootTable([
+    Item.createItem("Epic Sword", 1),
+    Item.createItem("Deadly Poison", 1),
+    Item.createItem("Gold Coin", 12),
+    Item.createItem("Gold Coin", 8),
+    Item.createItem("Gold Coin", 4),
+    Item.createItem("Lame Rocks", 16),
+    Item.createItem("Lame Rocks", 8),
+    Item.createItem("Lame Rocks", 4),
+    Item.createItem("Devious Dagger", 1),
+    Item.createItem("Ratkickers", 1)
+    ],[1,2,4,6,8,10,14,16,2,41]
+);
+
+const filthyGoblinLootTable = new LootTable([
+    Item.createItem("Rotten Food", 2),
+    Item.createItem("Gold Coin", 16),
+    Item.createItem("Gold Coin", 8),
+    Item.createItem("Lame Rocks", 16),
+    Item.createItem("Lame Rocks", 8),
+    Item.createItem("Lame Rocks", 4),
+    Item.createItem("Devious Dagger", 1),
+    Item.createItem("Ratkickers", 1)
+    ],[2,6,8,10,14,16,2,1]
+);
+
+const overgrownVoleLootTable = new LootTable([
+    Item.createItem("Fur Scrap", 2),
+    Item.createItem("Fur Scrap", 1),
+    Item.createItem("Bitter Morsel", 1),
+    Item.createItem("Big Tooth", 1),
+    Item.createItem("Pilfered Shiny", 1),
+    ],[12,24,7,2,1]
+);

@@ -75,7 +75,7 @@ class Item{
             case "Fossil Blade":
                 return new Item(name,quantity,"weapon","+20 dmg",RED);
             case "Treads of Crushing Depths":
-                return new Item(name,quantity,"feet","7% dmg",RED);
+                return new Item(name,quantity,"feet","9% dmg",RED);
             case "Emesis Amulet":
                 return new Item(name,quantity,"amulet","+9 dmg, 9% dmg, 9% chance to miss",RED);
             case "Crown of the Corpseeater":
@@ -146,6 +146,10 @@ class Item{
                 return new Item(name,quantity,"finger","40% dmg, miss every 4 attacks",GREEN);
             case "Goblin Ledger":
                 return new Item(name,quantity,"off-hand","1% damage every attack, resets after 12",RED);
+            case "Devious Dagger":
+                return new Item(name,quantity,"weapon","+6 dmg, 16% dmg",GREEN);
+            case "Ratkickers":
+                return new Item(name,quantity,"feet","6% dmg",GREEN);
             default:
                 return new Item(name,quantity);
         }
