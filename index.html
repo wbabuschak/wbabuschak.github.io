@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.1</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.1</h1>
+    <title>EPIC RPG FIGHT GAME v0.0.2</title>
+    <h1>EPIC RPG FIGHT GAME v0.0.2</h1>
     <p>By William Babuschak</p>
     
     <button id="attackButton">Attack!</button>
     <button id="autoButton">RSI Mode</button>
     <select id="worldSelect"></select>
+    <button id="resetButton">Reset Save Data</button>
+        
     <p></p>
     <button id="equipButton">Equip Item</button>
     <select id="equipSelect"></select>
@@ -27,12 +29,21 @@
     <script src="loot_tables.js"></script>
     <script src="enemies.js"></script>
 
+    <style>
+    #resetButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    </style>
+
     <script>
         let activeEntity;
         let inventory = new Inventory;
         let equipped = [];
         let autoMode = false;
         let autoInterval;
+        let attackCount = 0;
 
         function updateInventory(){
             const inventoryElement = document.getElementById("inventory");
@@ -85,22 +96,44 @@
             // default world
             worlds.push(0);
             // spirit world
-            if (itemEquipped("Spectral Cowl")){
+            if (itemEquipped("Spectral Cowl") || itemEquipped("Frozen Gemstone Amulet")){
                 worlds.push(1);
             }
             // desert world
             let goldCoins = inventory.items.find(i => i.name == "Gold Coin");
-            if (goldCoins && goldCoins.quantity > 500){
+            if (goldCoins && goldCoins.quantity >= 500){
                 worlds.push(2);
             }
 
             let hellItem1 = inventory.items.find(i => i.name == "Token of Faith");
             let hellItem2 = inventory.items.find(i => i.name == "Water Jar");
             let hellItem3 = inventory.items.find(i => i.name == "Venomous Gland");
-            let hellItem4 = inventory.items.find(i => i.name == "Drained Essense");
+            let hellItem4 = inventory.items.find(i => i.name == "Drained Essence");
 
             if (hellItem1 && hellItem2 && hellItem3 && hellItem4){
                 worlds.push(3);
+            }
+
+            let mountainItem1 = inventory.items.find(i => i.name == "Memento of the Vulture");
+            let mountainItem2 = inventory.items.find(i => i.name == "Memento of the Dino");
+            let mountainItem3 = inventory.items.find(i => i.name == "Memento of the Fangtooth");
+            let mountainItem4 = inventory.items.find(i => i.name == "Memento of the Succubus");
+            let mountainItem5 = inventory.items.find(i => i.name == "Memento of the Insect");
+            let mountainItem6 = inventory.items.find(i => i.name == "Memento of the Bovine");
+
+            let hasPromiseRing = itemEquipped("Promise Ring") || inventory.items.find(i => i.name == "Promise Ring");
+
+            if (mountainItem1 && mountainItem2 && mountainItem3 && mountainItem4 && mountainItem5 && mountainItem6 && hasPromiseRing){
+                worlds.push(4);
+            }
+
+            if (goldCoins && goldCoins.quantity >= 10000){
+                worlds.push(5);
+            }
+
+            let platinumCoins = inventory.items.find(i => i.name == "Platinum Coin");
+            if (platinumCoins){
+                worlds.push(6);
             }
             
             for (const world of worlds) {
@@ -157,7 +190,7 @@
 
             for (let i of equipped){
                 if (i.equippable == item.equippable){
-                    inventory.addItem(new Item(i.name, 1, i.equippable, i.desc));
+                    inventory.addItem(new Item(i.name, 1, i.equippable, i.desc, i.color));
                     equipped = equipped.filter(e => e !== i);
                 }
             }
@@ -165,7 +198,7 @@
             item.quantity -= 1;
             if(item.quantity == 0) inventory.items = inventory.items.filter(i => i.name !== itemName);
 
-            equipped.push(new Item(item.name, 1, item.equippable, item.desc));
+            equipped.push(new Item(item.name, 1, item.equippable, item.desc, item.color));
             // console.log("equipped " + itemName);
             updateInventory();
             updateEquipped();
@@ -187,16 +220,45 @@
                 return;
             }
             equipped = equipped.filter(i => i != item);
-            inventory.addItem(new Item(item.name, 1, item.equippable, item.desc));
+            inventory.addItem(new Item(item.name, 1, item.equippable, item.desc, item.color));
             updateInventory();
             updateEquipped();
             updateWorldSelect();
         }
 
         function worldName(i){
-            worlds = ["Default World", "Spirit World", "Desert World", "Hell World"];
+            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World"];
             return worlds[i];
         }
+
+        function saveGame() {
+            const saveData = {
+                items: inventory.serialize(),
+                equipped: equipped,
+            };
+            localStorage.setItem("gameSave", JSON.stringify(saveData));
+        }
+
+        function loadGame() {
+            const savedDataString = localStorage.getItem("gameSave");
+            if (savedDataString) {
+                const savedData = JSON.parse(savedDataString);
+
+                equipped = savedData.equipped || [];
+                autoMode = false;
+
+                inventory = new Inventory();
+                inventory.load(savedData.items || []);
+            } else {
+                inventory = new Inventory();
+            }
+            updateInventory();
+            updateEquipped();
+            updateWorldSelect();
+        }
+
+        window.onload = loadGame;
+        window.onbeforeunload = saveGame;
 
         updateInventory();
         updateEquipped();
@@ -207,6 +269,7 @@
         // attack button logic
         document.getElementById("attackButton").addEventListener("click", () => {
             activeEntity.damage(attackDamage(), inventory);
+            attackCount++;
             if (activeEntity.destroyed){
                 activeEntity = randomEnemy(Number(worldSelect.value));
                 updateInventory();
@@ -221,6 +284,16 @@
         });
         document.getElementById("unequipButton").addEventListener("click", () => {
             this.unequip(document.getElementById("unequipSelect").value);
+        });
+        document.getElementById("resetButton").addEventListener("click", () => {
+            inventory = new Inventory();
+            equipped = [];
+            autoMode = false;
+            updateWorldSelect();
+            activeEntity = randomEnemy(Number(worldSelect.value));
+            updateEntityDisplay();
+            saveGame();
+            loadGame();
         });
     </script>
 
@@ -256,9 +329,9 @@
                 };
                 if (i.name == "Gauntlets of Sheer Force") set_base = 10;
                 if (i.name == "Emesis Amulet"){
-                    miss_chance += 0.06;
-                    dmg_mult += 0.06;
-                    dmg += 6;
+                    miss_chance += 0.09;
+                    dmg_mult += 0.09;
+                    dmg += 9;
                 }
                 if (i.name == "Crown of the Corpseeater") dmg_mult += 0.11;
                 if (i.name == "Wraps of Temptation"){
@@ -267,12 +340,57 @@
                 }
                 if (i.name == "Blade of One Thousand Hooks") dmg_mult += 0.66;
                 if (i.name == "Stone of Michael") more_mult += 0.10;
-                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.05;
+                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.07;
                 if (i.name == "Fossil Blade") dmg += 20;
                 if (i.name == "Tooth Necklace") dmg += 6;
                 if (i.name == "Killer Gloves") dmg_mult += 0.03;
                 if (i.name == "Blasting Wand") dmg += 10;
-
+                if (i.name == "Ice Bear Fur Shawl") dmg += 10;
+                if (i.name == "Terror Mask") miss_chance -= 0.20;
+                if (i.name == "Dread Loop"){
+                    set_base = 16;
+                    miss_chance += 0.16;
+                }
+                if (i.name == "Mote of Arcane Power"){
+                    miss_chance -= 0.40;
+                    dmg_mult -= 0.20;
+                }
+                if (i.name == "Nature's Wrath"){
+                    dmg += 18;
+                    miss_chance -= 0.09;
+                    dmg_mult -+ 0.06;
+                }
+                if (i.name == "Ice Bear Paw Mitts") dmg += 6;
+                if (i.name == "Frozen Gemstone Amulet") dmg += 6;
+                if (i.name == "Baby Dragon Fang") dmg_mult += 0.13;
+                if (i.name == "Juvenile Dragon Talon") dmg += 33;
+                if (i.name == "Green Dragonscale Cape") dmg_mult += 0.07;
+                if (i.name == "Black Dragonscale Cape"){
+                    more_mult += 0.10;
+                    miss_chance += 0.07;
+                }
+                if (i.name == "Blue Dragonscale Cape") dmg += 7;
+                if (i.name == "Red Dragonscale Cape"){
+                    if (attackCount % 7 == 0) dmg_mult += 1.00;
+                }
+                if (i.name == "Dragon Mucus Tincture"){
+                    if (attackCount % 7 == 0) dmg_mult += 0.10;
+                }
+                if (i.name == "Dragonheart Piercer"){
+                    dmg_mult += 0.07;
+                    dmg += 26;
+                }
+                if (i.name == "Devastating Crossbow"){
+                    miss_chance -= 10000.0;
+                    dmg += 21;
+                }
+                if (i.name == "Snake-eye Chain") dmg += 2;
+                if (i.name == "Headcracker Mitts") dmg += 1 + Math.floor(Math.random() * 6);
+                if (i.name == "Ring of Greed"){
+                    dmg_mult += 0.40;
+                    if (attackCount % 4 == 0) miss_chance += 1000.0;
+                }
+                if (i.name == "Goblin Ledger") dmg_mult += 0.01 * (attackCount % 12);
             }
 
             dmg = set_base == -1 ? dmg : set_base;
@@ -320,6 +438,32 @@
                     enemies.push(spawnEnemy("Dreadful Dino"));
                     enemies.push(spawnEnemy("Vile Vulture"));
                     break;
+                case 4:
+                    enemies.push(spawnEnemy("Iceologer"));
+                    enemies.push(spawnEnemy("Spooky Revenant"));
+                    enemies.push(spawnEnemy("Ice Bear"));
+                    enemies.push(spawnEnemy("Animated Weapon"));
+                    enemies.push(spawnEnemy("Foul Necromancer"));
+                    break;
+                case 5:
+                    enemies.push(spawnEnemy("Juvenile Green Drake"));
+                    enemies.push(spawnEnemy("Juvenile Red Drake"));
+                    enemies.push(spawnEnemy("Juvenile Blue Drake"));
+                    enemies.push(spawnEnemy("Juvenile Black Drake"));
+                    enemies.push(spawnEnemy("Adolescent Green Drake"));
+                    enemies.push(spawnEnemy("Adolescent Red Drake"));
+                    enemies.push(spawnEnemy("Adolescent Blue Drake"));
+                    enemies.push(spawnEnemy("Adolescent Black Drake"));
+                    enemies.push(spawnEnemy("Green Drake"));
+                    enemies.push(spawnEnemy("Red Drake"));
+                    enemies.push(spawnEnemy("Blue Drake"));
+                    enemies.push(spawnEnemy("Black Drake"));
+                    enemies.push(spawnEnemy("Giant Anaconda"));
+                    enemies.push(spawnEnemy("Vainglorious Dragon Hunter"));
+                case 6:
+                    enemies.push(spawnEnemy("Boss Goblin"));
+                    enemies.push(spawnEnemy("Goblin Loanmaster"));
+                    enemies.push(spawnEnemy("Goblin Headcracker"));
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));
             }
@@ -339,6 +483,7 @@
                 document.getElementById("attackButton").disabled = true;
                 autoInterval = setInterval(() => {
                     activeEntity.damage(attackDamage(), inventory);
+                    attackCount++;
                     if (activeEntity.destroyed) {
                         activeEntity = randomEnemy(Number(worldSelect.value));
                         updateInventory();

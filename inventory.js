@@ -10,9 +10,27 @@ class Inventory{
                 return;
             }
         }
-        this.items.push(new Item(item.name,item.quantity,item.equippable,item.desc));
+        this.items.push(new Item(item.name,item.quantity,item.equippable,item.desc,item.color));
     }
+
     list(){
-        return this.items.map(item => item.toString()).join(", ")
+        let output = "";
+        let flag = true;
+        for (let item of this.items) {
+            if (!flag) output += ", ";
+            flag = false;
+            output += `<span style="color: ${item.color};">x${item.quantity} ${item.name}</span>`;
+        }
+        return output;
+    }
+
+    serialize(){
+        return this.items.map(item => item.serialize());
+    }
+
+    load(savedItems){
+        this.items = savedItems.map(data =>
+            new Item(data.name, data.quantity, data.equippable, data.desc, data.color)
+        );
     }
 }
