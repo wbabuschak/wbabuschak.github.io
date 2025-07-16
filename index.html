@@ -4,7 +4,8 @@
     <title>EPIC RPG FIGHT GAME v0.0.2</title>
     <h1>EPIC RPG FIGHT GAME v0.0.2</h1>
     <p>By William Babuschak</p>
-    
+    <button id="saveButton">Save Data</button>
+    <p></p>
     <button id="attackButton">Attack!</button>
     <button id="autoButton">RSI Mode</button>
     <select id="worldSelect"></select>
@@ -294,6 +295,9 @@
             updateEntityDisplay();
             saveGame();
             loadGame();
+        });
+        document.getElementById("saveButton").addEventListener("click", () => {
+            saveGame();
         });
     </script>
 
