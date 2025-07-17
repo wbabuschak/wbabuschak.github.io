@@ -209,6 +209,16 @@ const ENEMY_DEFS = {
         maxHealth: 21,
         lootTable: filthyGoblinLootTable
     },
+    "Treasure Goblin": {
+        name: "Treasure Goblin",
+        maxHealth: 100,
+        lootTable: treasureGoblinLootTable
+    },
+    "Keeper of Seals": {
+        name: "Keeper of Seals",
+        maxHealth: 4000,
+        lootTable: keeperOfSealsLootTable
+    },
 };
 
 function spawnEnemy(enemyName) {

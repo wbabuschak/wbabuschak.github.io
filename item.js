@@ -6,9 +6,9 @@ const GOLD = "#a89019ff";
 const LIGHT_BLUE = "#316db3ff";
 const DARK_BLUE = "#17467cff";
 const PURPLE = "#9a50c5ff";
+const LIGHT_PURPLE = "#c392dfff";
 
 class Item{
-
 
     constructor(name, quantity, equippable, desc, color){
         this.name = name;
@@ -37,7 +37,7 @@ class Item{
             case "Gold Coin":
                 return new Item(name,quantity,null,null,GOLD);
             case "Platinum Coin":
-                return new Item(name,quantity,null,null,GOLD);
+                return new Item(name,quantity,null,null,GRAY);
             case "Token of Faith":
                 return new Item(name,quantity,null,null,LIGHT_BLUE);
             case "Water Jar":
@@ -86,7 +86,7 @@ class Item{
                 return new Item(name,quantity,"chest","23% dmg, 10% chance to miss",DARK_BLUE);
             case "Blade of One Thousand Hooks":
                 return new Item(name,quantity,"weapon","66% dmg",RED);
-            case "Stone of Michael":
+            case "Stone of James":
                 return new Item(name,quantity,"finger","1.1x dmg",RED);
             case "Killer Gloves":
                 return new Item(name,quantity,"hands","3% dmg",GREEN);
@@ -117,7 +117,7 @@ class Item{
             case "Ice Bear Paw Mitts":
                 return new Item(name,quantity,"hands","+6 dmg",GREEN);
             case "Frozen Gemstone Amulet":
-                return new Item(name,quantity,"amulet","+6 dmg, access to spirit world",PURPLE);
+                return new Item(name,quantity,"amulet","+8 dmg, access to spirit world",PURPLE);
             case "Skullstompers":
                 return new Item(name,quantity,"feet","+1 dmg, access to spirit world",PURPLE);
             case "Baby Dragon Fang":
@@ -150,6 +150,34 @@ class Item{
                 return new Item(name,quantity,"weapon","+6 dmg, 16% dmg",GREEN);
             case "Ratkickers":
                 return new Item(name,quantity,"feet","6% dmg",GREEN);
+            case "Greedy Goldgrubber Grips":
+                return new Item(name,quantity,"hands","spawns treasure goblins",PURPLE);
+            case "Gold Cloak":
+                return new Item(name,quantity,"back","+1 dmg, 1% dmg, 1.01x dmg, +1% chance to hit",DARK_BLUE);
+            case "First Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Second Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Third Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Fourth Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Fifth Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Sixth Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Seventh Seal":
+                return new Item(name,quantity,null,null,LIGHT_PURPLE);
+            case "Helmet of Arcane Protection":
+                return new Item(name,quantity,"head","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+            case "Vest of Arcane Devotion":
+                return new Item(name,quantity,"chest","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+            case "Gauntlets of Arcane Postmultiplication":
+                return new Item(name,quantity,"hands","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+            case "Treads of Arcane Stabilization":
+                return new Item(name,quantity,"feet","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+            case "Staff of Arcane Domination":
+                return new Item(name,quantity,"weapon","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
             default:
                 return new Item(name,quantity);
         }

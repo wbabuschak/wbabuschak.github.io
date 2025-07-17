@@ -151,8 +151,14 @@
                 worlds.push(6);
             }
 
+            // magic World
+            let firstSeal = inventory.items.find(i => i.name == "First Seal");
+            let secondSeal = inventory.items.find(i => i.name == "Second Seal");
             
-            
+            if (firstSeal && secondSeal){
+                worlds.push(8);
+            }
+
             for (const world of worlds) {
                 let option = document.createElement("option");
                 option.value = world;
@@ -244,7 +250,7 @@
         }
 
         function worldName(i){
-            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World", "Default World (Part 2)"];
+            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World", "Default World (Part 2)", "Magic World"];
             return worlds[i];
         }
 
@@ -329,6 +335,7 @@
             let set_base = -1;
             let more_mult = 1.0;
             let miss_chance = 0.0;
+            let arcane_count = 0;
             for (let i of equipped){
                 if (i.name == "Common Dagger") dmg += 3;
                 if (i.name == "Ring of Slaying") dmg += 1;
@@ -364,7 +371,7 @@
                     miss_chance += .10;
                 }
                 if (i.name == "Blade of One Thousand Hooks") dmg_mult += 0.66;
-                if (i.name == "Stone of Michael") more_mult += 0.10;
+                if (i.name == "Stone of James") more_mult += 0.10;
                 if (i.name == "Treads of Crushing Depths") dmg_mult += 0.09;
                 if (i.name == "Fossil Blade") dmg += 20;
                 if (i.name == "Tooth Necklace") dmg += 6;
@@ -422,12 +429,40 @@
                     dmg_mult += 0.16;
                 };
                 if (i.name == "Ratkickers") dmg_mult += .06;
+                if (i.name == "Gold Cloak"){
+                    dmg += 1;
+                    dmg_mult += 0.01;
+                    more_mult += 0.01;
+                    miss_chance -= 0.01;
+                };
+                if (i.name == "Helmet of Arcane Protection"){
+                    dmg += 7;
+                    arcane_count++;
+                }
+                if (i.name == "Vest of Arcane Devotion"){
+                    dmg += 7;
+                    arcane_count++;
+                }
+                if (i.name == "Gauntlets of Arcane Postmultiplication"){
+                    dmg += 7;
+                    arcane_count++;
+                }
+                if (i.name == "Treads of Arcane Stabilization"){
+                    dmg += 7;
+                    arcane_count++;
+                }
+                if (i.name == "Staff of Arcane Domination"){
+                    dmg += 7;
+                    arcane_count++;
+                }
+
             }
 
-            dmg = set_base == -1 ? dmg : set_base;
             if (Math.random() < miss_chance){
                 return 0;
             }
+            dmg = set_base == -1 ? dmg : set_base;
+            dmg_mult += (arcane_count * arcane_count * .05);
             return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmg_mult) * Math.max(0.0, more_mult));
         }
 
@@ -504,8 +539,16 @@
                     enemies.push(spawnEnemy("Overgrown Vole"));
                     enemies.push(spawnEnemy("Mysterious Villain"));
                     break;
+                case 8:
+                    enemies.push(spawnEnemy("Keeper of Seals"));
+                    break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));
+            }
+            if (itemEquipped("Greedy Goldgrubber Grips")){
+                for (let i = 0; i < enemies.length; i++){
+                    enemies.push(spawnEnemy("Treasure Goblin"));
+                }
             }
             return enemies[Math.floor(Math.random() * enemies.length)];
         }

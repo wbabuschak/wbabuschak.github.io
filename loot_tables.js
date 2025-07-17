@@ -1,3 +1,5 @@
+// DEFAULT WORLD
+
 const commonThiefLootTable = new LootTable([
     Item.createItem("Epic Sword", 1),
     Item.createItem("Deadly Poison", 1),
@@ -35,6 +37,8 @@ const mysteriousVillainLootTable = new LootTable([
     ],[5,5,5,5,4,2,1]
 );
 
+// SPIRIT WORLD
+
 const spectralFiendLootTable = new LootTable([
     Item.createItem("Ectoplasm", 6),
     Item.createItem("Ectoplasm", 12),
@@ -66,6 +70,8 @@ const ghastlyHorrorLootTable = new LootTable([
     Item.createItem("Skullstompers", 1)
     ],[62,8,6,4,2,2,1]
 );
+
+// DESERT WORLD
 
 const desertWraithLootTable = new LootTable([
     Item.createItem("Gold Coin", 39),
@@ -120,6 +126,8 @@ const sandstoneGolemLootTable = new LootTable([
     ],[8,10,12,6,8,10,4,2,1]
 );
 
+// HELL WORLD
+
 const blazingBovineLootTable = new LootTable([
     Item.createItem("Weary Soul", 6),
     Item.createItem("Repressed Memory", 6),
@@ -127,7 +135,7 @@ const blazingBovineLootTable = new LootTable([
     Item.createItem("Shattered Innocence", 6),
     Item.createItem("Memento of the Bovine", 1),
     Item.createItem("Wraps of Temptation", 1),
-    Item.createItem("Stone of Michael", 1)
+    Item.createItem("Stone of James", 1)
     ],[12,12,12,12,3,1,1]
 );
 
@@ -186,6 +194,8 @@ const vileVultureLootTable = new LootTable([
     ],[12,12,12,12,3,1,1]
 );
 
+// ICE WORLD
+
 const iceologerLootTable = new LootTable([
     Item.createItem("Fur Scrap", 7),
     Item.createItem("Fur Scrap", 5),
@@ -242,6 +252,8 @@ const foulNecromancerLootTable = new LootTable([
     ],[12,18,24,30,39,18,24,6,2,1]
 );
 
+// DRAGON SWAMP WORLD
+
 const juvenileDrakeLootTable = new LootTable([
     Item.createItem("Dragon Scale", 5),
     Item.createItem("Dragon Scale", 4),
@@ -250,7 +262,8 @@ const juvenileDrakeLootTable = new LootTable([
     Item.createItem("Dragon Scale", 1),
     Item.createItem("Sticky Dragon Mucus", 1),
     Item.createItem("Baby Dragon Fang", 1),
-    ],[4,8,12,16,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,2,1,1]
 );
 
 const adolescentDrakeLootTable = new LootTable([
@@ -263,7 +276,8 @@ const adolescentDrakeLootTable = new LootTable([
     Item.createItem("Gold Coin", 610),
     Item.createItem("Sticky Dragon Mucus", 1),
     Item.createItem("Juvenile Dragon Talon", 1),
-    ],[4,8,12,16,20,10,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,10,20,2,1,1]
 );
 
 const greenDrakeLootTable = new LootTable([
@@ -276,7 +290,8 @@ const greenDrakeLootTable = new LootTable([
     Item.createItem("Gold Coin", 910),
     Item.createItem("Green Dragonscale Cape", 1),
     Item.createItem("Dragon Mucus Tincture", 1),
-    ],[4,8,12,16,20,10,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,10,20,2,1,1]
 );
 
 const blackDrakeLootTable = new LootTable([
@@ -289,7 +304,8 @@ const blackDrakeLootTable = new LootTable([
     Item.createItem("Gold Coin", 990),
     Item.createItem("Black Dragonscale Cape", 1),
     Item.createItem("Dragon Mucus Tincture", 1),
-    ],[4,8,12,16,20,10,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,10,20,2,1,1]
 );
 
 const blueDrakeLootTable = new LootTable([
@@ -302,7 +318,8 @@ const blueDrakeLootTable = new LootTable([
     Item.createItem("Gold Coin", 1031),
     Item.createItem("Blue Dragonscale Cape", 1),
     Item.createItem("Dragon Mucus Tincture", 1),
-    ],[4,8,12,16,20,10,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,10,20,2,1,1]
 );
 
 const redDrakeLootTable = new LootTable([
@@ -315,7 +332,8 @@ const redDrakeLootTable = new LootTable([
     Item.createItem("Gold Coin", 1108),
     Item.createItem("Red Dragonscale Cape", 1),
     Item.createItem("Dragon Mucus Tincture", 1),
-    ],[4,8,12,16,20,10,20,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,10,20,2,1,1]
 );
 
 const giantAnacondaLootTable = new LootTable([
@@ -332,7 +350,8 @@ const giantAnacondaLootTable = new LootTable([
     Item.createItem("Gold Coin", 1108),
     Item.createItem("Rotten Meat", 1),
     Item.createItem("Snake-eye Chain", 1),
-    ],[4,8,12,13,12,11,10,9,8,7,6,2,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,13,12,11,10,9,8,7,6,2,1,1]
 );
 
 const vaingloriousDragonHunter = new LootTable([
@@ -344,8 +363,11 @@ const vaingloriousDragonHunter = new LootTable([
     Item.createItem("Dragonheart Piercer", 1),
     Item.createItem("Devastating Crossbow", 1),
     Item.createItem("Platinum Coin", 1),
-    ],[4,8,12,16,20,6,3,1]
+    Item.createItem("Second Seal", 1),
+    ],[4,8,12,16,20,6,3,1,1]
 );
+
+// GOLD WORLD
 
 const bossGoblinLootTable = new LootTable([
     Item.createItem("Gold Coin", 1770),
@@ -353,7 +375,8 @@ const bossGoblinLootTable = new LootTable([
     Item.createItem("Broken Rubber Band", 1),
     Item.createItem("Ring of Greed", 1),
     Item.createItem("Boss Goblin's Gilded Fountain Pen", 1),
-    ],[50,39,8,2,1]
+    Item.createItem("First Seal", 1),
+    ],[50,39,8,2,1,1]
 );
 
 const goblinLoanmasterLootTable = new LootTable([
@@ -362,7 +385,8 @@ const goblinLoanmasterLootTable = new LootTable([
     Item.createItem("Broken Rubber Band", 1),
     Item.createItem("Ring of Greed", 1),
     Item.createItem("Goblin Ledger", 1),
-    ],[50,39,8,2,1]
+    Item.createItem("First Seal", 1),
+    ],[50,39,8,2,1,1]
 );
 
 const goblinHeadcrackerLootTable = new LootTable([
@@ -371,7 +395,8 @@ const goblinHeadcrackerLootTable = new LootTable([
     Item.createItem("Broken Tire Iron", 1),
     Item.createItem("Ring of Greed", 1),
     Item.createItem("Headcracker Mitts", 1),
-    ],[50,39,8,2,1]
+    Item.createItem("First Seal", 1),
+    ],[50,39,8,2,1,1]
 );
 
 const goldGoblinGolemLootTable = new LootTable([
@@ -383,8 +408,11 @@ const goldGoblinGolemLootTable = new LootTable([
     Item.createItem("Gold Coin", 4600),
     Item.createItem("Gold Coin", 6400),
     Item.createItem("Gold Coin", 9800),
-    ],[50,45,40,35,30,25,10,5]
+    Item.createItem("First Seal", 1),
+    ],[50,45,40,35,30,25,10,5,1]
 );
+
+// DEFAULT WORLD PART 2
 
 const uncommonBanditLootTable = new LootTable([
     Item.createItem("Epic Sword", 1),
@@ -408,8 +436,9 @@ const filthyGoblinLootTable = new LootTable([
     Item.createItem("Lame Rocks", 8),
     Item.createItem("Lame Rocks", 4),
     Item.createItem("Devious Dagger", 1),
-    Item.createItem("Ratkickers", 1)
-    ],[2,6,8,10,14,16,2,1]
+    Item.createItem("Ratkickers", 1),
+    Item.createItem("Greedy Goldgrubber Grips",1)
+    ],[2,6,8,10,14,16,2,1,1]
 );
 
 const overgrownVoleLootTable = new LootTable([
@@ -418,5 +447,37 @@ const overgrownVoleLootTable = new LootTable([
     Item.createItem("Bitter Morsel", 1),
     Item.createItem("Big Tooth", 1),
     Item.createItem("Pilfered Shiny", 1),
-    ],[12,24,7,2,1]
+    Item.createItem("Greedy Goldgrubber Grips",1)
+    ],[12,24,7,2,1,1]
+);
+
+// SPECIAL SPAWN
+
+const treasureGoblinLootTable = new LootTable([
+    Item.createItem("Gold Coin", 1),
+    Item.createItem("Gold Coin", 10),
+    Item.createItem("Gold Coin", 100),
+    Item.createItem("Gold Coin", 1000),
+    Item.createItem("Gold Cloak", 1),
+    ],[80,40,20,10,1]
+);
+
+// ARCANE WORLD
+
+const keeperOfSealsLootTable = new LootTable([
+    Item.createItem("Magical Essence", 13),
+    Item.createItem("Magical Essence", 15),
+    Item.createItem("Magical Essence", 17),
+    Item.createItem("Magical Essence", 19),
+    Item.createItem("Third Seal", 1),
+    Item.createItem("Fourth Seal", 1),
+    Item.createItem("Fifth Seal", 1),
+    Item.createItem("Sixth Seal", 1),
+    Item.createItem("Seventh Seal", 1),
+    Item.createItem("Helmet of Arcane Protection", 1),
+    Item.createItem("Vest of Arcane Devotion", 1),
+    Item.createItem("Gauntlets of Arcane Postmultiplication", 1),
+    Item.createItem("Treads of Arcane Stabilization", 1),
+    Item.createItem("Staff of Arcane Domination", 1),
+    ],[60,50,40,30,2,2,2,2,2,1,1,1,1,1]
 );
