@@ -7,6 +7,7 @@ const LIGHT_BLUE = "#316db3ff";
 const DARK_BLUE = "#17467cff";
 const PURPLE = "#9a50c5ff";
 const LIGHT_PURPLE = "#c392dfff";
+const LIGHT_YELLOW = "#fcde39ff";
 
 class Item{
 
@@ -115,7 +116,7 @@ class Item{
             case "Nature's Wrath":
                 return new Item(name,quantity,"weapon","+18 dmg, +9% chance to hit, 6% dmg",RED);
             case "Ice Bear Paw Mitts":
-                return new Item(name,quantity,"hands","+6 dmg",GREEN);
+                return new Item(name,quantity,"hands","+5 dmg",GREEN);
             case "Frozen Gemstone Amulet":
                 return new Item(name,quantity,"amulet","+8 dmg, access to spirit world",PURPLE);
             case "Skullstompers":
@@ -141,7 +142,7 @@ class Item{
             case "Snake-eye Chain":
                 return new Item(name,quantity,"off-hand","+2 dmg",GREEN);
             case "Headcracker Mitts":
-                return new Item(name,quantity,"hands","+1-6 dmg",RED);
+                return new Item(name,quantity,"hands","+1-12 dmg",RED);
             case "Ring of Greed":
                 return new Item(name,quantity,"finger","40% dmg, miss every 4 attacks",GREEN);
             case "Goblin Ledger":
@@ -169,15 +170,41 @@ class Item{
             case "Seventh Seal":
                 return new Item(name,quantity,null,null,LIGHT_PURPLE);
             case "Helmet of Arcane Protection":
-                return new Item(name,quantity,"head","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+                return new Item(name,quantity,"head","+7 dmg, 3% dmg per arcane equip",DARK_BLUE);
             case "Vest of Arcane Devotion":
-                return new Item(name,quantity,"chest","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+                return new Item(name,quantity,"chest","+7 dmg, 3% dmg per arcane equip",DARK_BLUE);
             case "Gauntlets of Arcane Postmultiplication":
-                return new Item(name,quantity,"hands","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+                return new Item(name,quantity,"hands","+7 dmg, 3% dmg per arcane equip",DARK_BLUE);
             case "Treads of Arcane Stabilization":
-                return new Item(name,quantity,"feet","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+                return new Item(name,quantity,"feet","+7 dmg, 3% dmg per arcane equip",DARK_BLUE);
             case "Staff of Arcane Domination":
-                return new Item(name,quantity,"weapon","+7 dmg, 5% dmg per arcane equip",DARK_BLUE);
+                return new Item(name,quantity,"weapon","+7 dmg, 3% dmg per arcane equip",DARK_BLUE);
+            case "Arcane Star Jar":
+                return new Item(name,quantity,null,null,LIGHT_YELLOW);
+            case "Arcane Focusing Gem":
+                return new Item(name,quantity,"finger","1.13x dmg",RED);
+            case "Arcane Circuitboard":
+                return new Item(name,quantity,"trinket","8% dmg every 3 attacks",RED);
+            case "Arcane Iris":
+                return new Item(name,quantity,"amulet","-10% dmg, your attacks that would miss deal half damage",RED);
+            case "Arcane Shield":
+                return new Item(name,quantity,"off-hand","5% dmg, +10% chance to hit",RED);
+            case "Arcane Phylactery":
+                return new Item(name,quantity,"trinket","18% dmg, 10% chance to miss",RED);
+            case "Astral Hammer":
+                return new Item(name,quantity,"weapon","+100 dmg, 50% chance to miss",RED);
+            case "Moon Blasting Super Smashers":
+                return new Item(name,quantity,"hands","base damage is always 40",RED);
+            case "Laser Gigawatt Charger":
+                return new Item(name,quantity,"off-hand","30% dmg with laser weapons",GREEN);
+            case "Laser-powered Goblin Smasher":
+                return new Item(name,quantity,"weapon","+22 dmg, 2.00x damage every 3 attacks",RED);
+            case "Green Laser Blaster":
+                return new Item(name,quantity,"weapon","+55 dmg",GREEN);
+            case "Grey Laser Blaster":
+                return new Item(name,quantity,"weapon","+50 dmg, 10% dmg",GREEN);
+            case "Nebula Gemstone":
+                return new Item(name,quantity,"amulet","50% dmg every 2 attacks",GREEN);
             default:
                 return new Item(name,quantity);
         }

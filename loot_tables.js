@@ -479,5 +479,125 @@ const keeperOfSealsLootTable = new LootTable([
     Item.createItem("Gauntlets of Arcane Postmultiplication", 1),
     Item.createItem("Treads of Arcane Stabilization", 1),
     Item.createItem("Staff of Arcane Domination", 1),
-    ],[60,50,40,30,2,2,2,2,2,1,1,1,1,1]
+    ],[120,100,80,60,4,4,4,4,4,1,1,1,1,1]
+);
+
+// ARCANE WORLD PART 2
+
+const arcaneSoulStitcherLootTable = new LootTable([
+    Item.createItem("Arcane Star Jar", 1),
+    Item.createItem("Magical Essence", 15),
+    Item.createItem("Magical Essence", 17),
+    Item.createItem("Magical Essence", 19),
+    Item.createItem("Gauntlets of Arcane Postmultiplication", 1),
+    Item.createItem("Arcane Phylactery", 1),
+    ],[1,50,40,30,1,1]
+);
+
+const arcaneKnightLootTable = new LootTable([
+    Item.createItem("Arcane Star Jar", 1),
+    Item.createItem("Magical Essence", 17),
+    Item.createItem("Magical Essence", 19),
+    Item.createItem("Magical Essence", 21),
+    Item.createItem("Helmet of Arcane Protection", 1),
+    Item.createItem("Arcane Shield", 1),
+    ],[1,50,40,30,1,1]
+);
+
+const arcaneDevoteeLootTable = new LootTable([
+    Item.createItem("Arcane Star Jar", 1),
+    Item.createItem("Magical Essence", 13),
+    Item.createItem("Magical Essence", 15),
+    Item.createItem("Magical Essence", 17),
+    Item.createItem("Vest of Arcane Devotion", 1),
+    Item.createItem("Arcane Iris", 1),
+    ],[1,50,40,30,1,1]
+);
+
+const arcaneBattlemageLootTable = new LootTable([
+    Item.createItem("Arcane Star Jar", 1),
+    Item.createItem("Magical Essence", 15),
+    Item.createItem("Magical Essence", 17),
+    Item.createItem("Magical Essence", 19),
+    Item.createItem("Staff of Arcane Domination", 1),
+    Item.createItem("Arcane Focusing Gem", 1),
+    ],[1,50,40,30,1,1]
+);
+
+const arcaneGolemLootTable = new LootTable([
+    Item.createItem("Arcane Star Jar", 1),
+    Item.createItem("Magical Essence", 19),
+    Item.createItem("Magical Essence", 21),
+    Item.createItem("Magical Essence", 23),
+    Item.createItem("Treads of Arcane Stabilization", 1),
+    Item.createItem("Arcane Circuitboard", 1),
+    ],[1,50,40,30,1,1]
+);
+
+// SPACE WORLD
+
+const moonRockGolemLootTable = new LootTable([
+    Item.createItem("Useless Moon Rock", 7),
+    Item.createItem("Useless Moon Rock", 6),
+    Item.createItem("Useless Moon Rock", 5),
+    Item.createItem("Useless Moon Rock", 4),
+    Item.createItem("Useless Moon Rock", 3),
+    Item.createItem("Useless Moon Rock", 2),
+    Item.createItem("Useless Moon Rock", 1),
+    Item.createItem("Moon Blasting Super Smashers", 1),
+    Item.createItem("Nebula Gemstone", 1),
+    ],[4,8,12,16,20,24,28,1,1]
+);
+
+
+const livingCometLootTable = new LootTable([
+    Item.createItem("Useless Moon Rock", 7),
+    Item.createItem("Useless Moon Rock", 6),
+    Item.createItem("Useless Moon Rock", 5),
+    Item.createItem("Useless Moon Rock", 4),
+    Item.createItem("Useless Moon Rock", 3),
+    Item.createItem("Useless Moon Rock", 2),
+    Item.createItem("Useless Moon Rock", 1),
+    Item.createItem("Astral Hammer", 1),
+    Item.createItem("Nebula Gemstone", 1),
+    ],[4,8,12,16,20,24,28,1,1]
+);
+
+const greyLaserAlienLootTable = new LootTable([
+    Item.createItem("Broken Laser Gun", 1),
+    Item.createItem("Alien Sludge", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Green Laser Blaster", 1),
+    Item.createItem("Laser Gigawatt Charger", 1),
+    ],[78,12,6,3,1]
+);
+
+const greenLaserAlienLootTable = new LootTable([
+    Item.createItem("Broken Laser Gun", 1),
+    Item.createItem("Alien Sludge", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Green Laser Blaster", 1),
+    Item.createItem("Laser Gigawatt Charger", 1),
+    ],[78,12,6,3,1]
+);
+
+const uglyBugAlienLootTable = new LootTable([
+    Item.createItem("Broken Laser Gun", 1),
+    Item.createItem("Alien Sludge", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Green Laser Blaster", 1),
+    Item.createItem("Laser Gigawatt Charger", 1),
+    ],[78,12,6,3,1]
+);
+
+const superstellarSpaceRaiderLootTable = new LootTable([
+    Item.createItem("Random Alien Junk", 1),
+    Item.createItem("Freaky Moon Boots", 1),
+    Item.createItem("Keys to the Galaxy", 1),
+    Item.createItem("Alien Sludge", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Laser-powered Goblin Smasher", 1),
+    Item.createItem("Laser Gigawatt Charger", 1),
+    ],[50,23,15,13,5,2,1,1]
 );

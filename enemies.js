@@ -215,9 +215,64 @@ const ENEMY_DEFS = {
         lootTable: treasureGoblinLootTable
     },
     "Keeper of Seals": {
-        name: "Keeper of Seals",
+        name: "Keeper of Seals", 
         maxHealth: 4000,
         lootTable: keeperOfSealsLootTable
+    },
+    "Arcane Soul Stitcher": {
+        name: "Arcane Soul Stitcher",
+        maxHealth: 4333,
+        lootTable: arcaneSoulStitcherLootTable
+    },
+    "Arcane Knight": {
+        name: "Arcane Knight",
+        maxHealth: 5109,
+        lootTable: arcaneKnightLootTable
+    },
+    "Arcane Devotee": {
+        name: "Arcane Devotee",
+        maxHealth: 3481,
+        lootTable: arcaneDevoteeLootTable
+    },
+    "Arcane Battlemage": {
+        name: "Arcane Battlemage",
+        maxHealth: 4218,
+        lootTable: arcaneBattlemageLootTable
+    },
+    "Arcane Golem": {
+        name: "Arcane Golem",
+        maxHealth: 6100,
+        lootTable: arcaneGolemLootTable
+    },
+    "Green Laser Alien": {
+        name: "Green Laser Alien",
+        maxHealth: 5115,
+        lootTable: greenLaserAlienLootTable
+    },
+    "Grey Laser Alien": {
+        name: "Grey Laser Alien",
+        maxHealth: 5115,
+        lootTable: greyLaserAlienLootTable
+    },
+    "Ugly Bug Alien": {
+        name: "Ugly Bug Alien",
+        maxHealth: 4554,
+        lootTable: uglyBugAlienLootTable
+    },
+    "Superstellar Space Raider": {
+        name: "Superstellar Space Raider",
+        maxHealth: 7117,
+        lootTable: superstellarSpaceRaiderLootTable
+    },
+    "Living Comet": {
+        name: "Living Comet",
+        maxHealth: 13031,
+        lootTable: livingCometLootTable
+    },
+    "Moon Rock Golem": {
+        name: "Moon Rock Golem",
+        maxHealth: 14241,
+        lootTable: moonRockGolemLootTable
     },
 };
 
