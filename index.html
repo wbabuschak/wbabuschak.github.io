@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.3</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.3</h1>
+    <title>EPIC RPG FIGHT GAME v0.0.3b</title>
+    <h1>EPIC RPG FIGHT GAME v0.0.3b</h1>
     <p>By William Babuschak</p>
-
+    <button id="saveButton">Save Game Data</button>
+    <p></p>
     <button id="attackButton">Attack!</button>
     <p></p>
     <button id="autoButton">RSI Mode</button>
@@ -358,6 +359,9 @@
         document.getElementById("unequipButton").addEventListener("click", () => {
             this.unequip(document.getElementById("unequipSelect").value);
         });
+        document.getElementById("saveButton").addEventListener("click", () => {
+            saveGame();
+        });
         document.getElementById("resetButton").addEventListener("click", () => {
             inventory = new Inventory();
             equipped = [];
@@ -673,7 +677,8 @@
                     worldColor
             }
             if (itemEquipped("Greedy Goldgrubber Grips")){
-                for (let i = 0; i < enemies.length; i++){
+                let fixedSize = enemies.length;
+                for (let i = 0; i < fixedSize; i++){
                     enemies.push(spawnEnemy("Treasure Goblin"));
                 }
             }

@@ -114,7 +114,7 @@ class Item{
             case "Mote of Arcane Power":
                 return new Item(name,quantity,"finger","+40% chance to hit, -20% dmg",RED);
             case "Nature's Wrath":
-                return new Item(name,quantity,"weapon","+18 dmg, +9% chance to hit, 6% dmg",RED);
+                return new Item(name,quantity,"weapon","+18 dmg", "6% dmg", "+9% chance to hit", RED);
             case "Ice Bear Paw Mitts":
                 return new Item(name,quantity,"hands","+5 dmg",GREEN);
             case "Frozen Gemstone Amulet":
