@@ -192,7 +192,7 @@ const ENEMY_DEFS = {
     "Gold Goblin Golem": {
         name: "Gold Goblin Golem",
         maxHealth: 3100,
-        lootTable: goldGoblinGolemLootTable
+        lootTable: goldGoblinGolemLootTable,
     },
     "Uncommon Bandit": {
         name: "Uncommon Bandit",
@@ -410,6 +410,7 @@ function spawnEnemy(enemyName) {
     return new Entity(
         template.name,
         template.maxHealth,
-        template.lootTable
+        template.lootTable,
+        template.armor
     );
 }

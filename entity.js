@@ -1,27 +1,32 @@
 class Entity{
-    constructor(name, maxHealth, lootTable){
+    constructor(name, maxHealth, lootTable, armor = 0){
         this.name = name;
         this.maxHealth = maxHealth;
         this.HP = maxHealth;
         this.destroyed = false;
         this.lootTable = lootTable;
+        this.armor = armor;
+        this.loot = null;
     }
-    damage(damage, inventory){
-        if (this.HP > 0) this.HP-= damage;
-        this.updateDestroy(inventory);
+    
+    damage(damage){
+        if (this.HP > 0) this.HP-= Math.max(0,damage - this.armor);
+         if (this.HP <= 0 && !this.destroyed) {
+            this.destroyed = true;
+            this.name += " (destroyed)";
+         }
     }
-    updateDestroy(inventory){
-        if (this.HP <= 0 && this.destroyed == false){
-            if (this.lootTable != null){
-                let drops =  this.lootTable.getDrop(1);
-                for (let i = 0; i < drops.length; i++){
-                    inventory.addItem(drops[i]);
-                }
+
+    getLoot() {
+       if (this.destroyed){
+            if (this.lootTable != null) {
+                return this.lootTable.getDrop(1);
             } else {
                 console.log(this.name + " drops nothing (null loot table)");
+                return [];
             }
-            this.name += " (destroyed)";
-            this.destroyed = true;
         }
+        // loot not dropped (entity still alive)
+        return null;
     }
 }

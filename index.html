@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.4b</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.4b</h1>
+    <title>EPIC RPG FIGHT GAME v0.0.4c</title>
+    <h1>EPIC RPG FIGHT GAME v0.0.4c</h1>
     <p>By William Babuschak</p>
     <button id="saveButton">Save Game Data</button>
     <p></p>
@@ -14,15 +14,16 @@
     <button id="resetButton">Reset Save Data</button>
         
     <p id="worldTimer"></p>
-    <button id="equipButton">Equip Item</button>
+    <button id="equipButton">Equip</button>
     <select id="equipSelect"></select>
     <p></p>
-    <button id="unequipButton">Unquip Item</button>
+    <button id="unequipButton">Unquip</button>
     <select id="unequipSelect"></select>
     
     <p id = "entityDisplay"></p>
     <p id = "dpsDisplay"></p>
     <p id = "equippedItems"></p>
+    <p id = "lootDisplay"></p>
     <p id = "inventory"></p>
     
     
@@ -40,15 +41,42 @@
         #attackButton {
             font-size: 36px;
             padding: 12px 24px;
+            font-weight: bold;
         }
         #autoButton {
             font-size: 36px;
             padding: 12px 2px;
+            font-weight: bold;
         }
         #resetButton {
             position: absolute;
             top: 0;
             right: 0;
+        }
+        #equipButton {
+            width: 84px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        #unequipButton {
+            width: 84px;
+            height: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        #equipSelect {
+            height: 30px;
+            vertical-align: middle;
+        }
+        #unequipSelect {
+            height: 30px;
+            vertical-align: middle;
+        }
+        #saveButton {
+            font-weight: bold;
         }
     </style>
 
@@ -92,6 +120,8 @@
             } else {
                 equippedElement.innerHTML = equipped.map(item => item.name + " (" + item.desc +")").join("<br>");
             }
+            lastHits = [];
+            updateDPSDisplay();
         }
 
         function updateEquipSelect() {
@@ -241,18 +271,28 @@
 
         function addToLastHits(damage){
             lastHits.push(damage);
-            if (lastHits.length > 40){
+            if (lastHits.length > 100){
                 lastHits.shift();
             }
         }
 
         function updateEntityDisplay(lastHit){
-            document.getElementById("entityDisplay").innerHTML = lastHit == -1 ? activeEntity.name + "<br>" + activeEntity.HP : activeEntity.name + "<br>" + activeEntity.HP + " (-" + lastHit + ")";
+            document.getElementById("entityDisplay").innerHTML = 
+            lastHit == -1
+                ? `${activeEntity.name}<br>${activeEntity.HP}`
+                : activeEntity.armor > 0
+                    ? `${activeEntity.name}<br>${activeEntity.HP} (-${lastHit - activeEntity.armor}) (${lastHit} dmg, ${activeEntity.armor} armor)`
+                    : `${activeEntity.name}<br>${activeEntity.HP} (-${lastHit})`;
             if (lastHit > -1) addToLastHits(lastHit);
+            updateDPSDisplay();
+        }
+
+        function updateDPSDisplay(){
             if (lastHits.length == 0){
                 document.getElementById("dpsDisplay").innerHTML = "0 average dmg"
                 return;
             }
+            
             let cumDamage = 0;
             
             for (let i = 0; i < lastHits.length; i++){
@@ -511,7 +551,7 @@
                 if (i.name == "Ambush Sensor") more_mult += 0.10;
                 if (i.name == "Gar'Ahan, Fleshstripper"){
                     dmg += 300;
-                    miss_chance += 1.00;
+                    miss_chance += 1.50;
                 }
                 if (i.name == "Tabis of Inexorable Torment"){
                     dmg += 18;
@@ -569,7 +609,8 @@
             "Dragon Swamp World", 
             "Gold World", 
             "Default World (Part 2)", 
-            "Magic World", 
+            "Magic World",
+            "Magic World (Part 2)",
             "Space World",
             "Volcano Planet World",
             "Pleasure World",
@@ -636,16 +677,31 @@
     </script>
 
     <script>
+        let textTimer;
         function hit(){
             let hit = attackDamage();
-            activeEntity.damage(hit, inventory);
+            let loot;
+            activeEntity.damage(hit);
             attackCount++;
             enemyAttacks++;
             if (activeEntity.destroyed){
+                if (loot = activeEntity.getLoot()){
+                    for (let item of loot){
+                        inventory.addItem(item);
+                    }
+                    document.getElementById("lootDisplay").innerHTML = "Got: " + loot[0].quantity + "x" + `<span style="color: ${loot[0].color}"> ${loot[0].name}</span>`;
+                    if (textTimer) clearTimeout(textTimer);
+                    textTimer = setTimeout(() => {
+                        document.getElementById("lootDisplay").innerHTML = "";
+                        textTimer = null;
+                    }, 3000);
+                }
+
                 activeEntity = randomEnemy(Number(worldSelect.value));
                 enemyAttacks = 0;
                 updateInventory();
             } 
+
             updateEntityDisplay(hit);
         }
         // attack button logic
@@ -665,14 +721,16 @@
             saveGame();
         });
         document.getElementById("resetButton").addEventListener("click", () => {
-            inventory = new Inventory();
-            equipped = [];
-            autoMode = false;
-            updateWorldSelect();
-            activeEntity = randomEnemy(Number(worldSelect.value));
-            updateEntityDisplay(-1);
-            saveGame();
-            loadGame();
+            if (confirm("Are you sure you want to reset your sava data? This cannot be undone.")) {
+                inventory = new Inventory();
+                equipped = [];
+                autoMode = false;
+                updateWorldSelect();
+                activeEntity = randomEnemy(Number(worldSelect.value));
+                updateEntityDisplay(-1);
+                saveGame();
+                loadGame();
+            }
         });
         // document.getElementById("saveButton").addEventListener("click", () => {
         //     saveGame();
@@ -810,7 +868,7 @@
                     }
                 }
                 if (i.name == "Cape of the Neutron Star"){
-                    if (attackCount % 47 == 0){
+                    if (attackCount % 45 == 0){
                         dmgMult += 16.00;
                     }
                 }
@@ -973,9 +1031,22 @@
                     enemies.push(spawnEnemy("Student of Syzygy"));
                     worldColor = "#bca3ccff"
                     break;
+                case 15:
+                    enemies.push(spawnEnemy("Echo of Roc"));
+                    enemies.push(spawnEnemy("Echo of Medusa"));
+                    enemies.push(spawnEnemy("Echo of Minotaur"));
+                    enemies.push(spawnEnemy("Echo of Cerberus"));
+                    enemies.push(spawnEnemy("Echo of Basilisk"));
+                    enemies.push(spawnEnemy("Echo of Chimera"));
+                    enemies.push(spawnEnemy("Echo of Hydra"));
+                    enemies.push(spawnEnemy("Echo of Kraken"));
+                    enemies.push(spawnEnemy("Echo of Fenrir"));
+                    enemies.push(spawnEnemy("Echo of Jörmungandr"));
+                    worldColor = "#ccbea3ff"
+                    break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));
-                    worldColor = "#ffffff"
+                    worldColor = "rgba(204, 200, 163, 1)";
             }
             if (itemEquipped("Greedy Goldgrubber Grips")){
                 let fixedSize = enemies.length;

@@ -18,14 +18,14 @@ class Inventory{
     list(){
         let output = "";
         let flag = true;
-        const colors = ["#a89019ff", "#aa2a0aff", "#17467cff", "#2b814fff","#9a50c5ff", "#686868ff", "#6e1b07ff", "#316db3ff", "#c392dfff", "#fcde39ff", "#000000"];
+        const colors = ["#a89019ff", "#aa2a0aff", "#17467cff", "#2b814fff","#9a50c5ff", "#686868ff", "#6e1b07ff", "#316db3ff", "#c392dfff", "#d8b800ff", "#000000"];
         let sorted = this.items.slice().sort((a, b) => {
             return colors.indexOf(a.color) - colors.indexOf(b.color);
         });
         for (let item of sorted) {
             if (!flag) output += ", ";
             flag = false;
-            output += `<span style="color: ${item.color};">x${item.quantity} ${item.name}</span>`;
+            output += item.quantity + "x" + `<span style="color: ${item.color};"> ${item.name}</span>`;
         }
         return output;
     }

@@ -7,7 +7,7 @@ const LIGHT_BLUE = "#316db3ff";
 const DARK_BLUE = "#17467cff";
 const PURPLE = "#9a50c5ff";
 const LIGHT_PURPLE = "#c392dfff";
-const LIGHT_YELLOW = "#fcde39ff";
+const LIGHT_YELLOW = "#e7c818ff";
 
 class Item{
 
@@ -266,7 +266,7 @@ class Item{
             case "Electric Eye":
                 return new Item(name,quantity,"trinket","+1 dmg every attack, resets after 33",GREEN);
             case "Gar'Ahan, Fleshstripper":
-                return new Item(name,quantity,"weapon","+300 dmg, 100% chance to miss",RED);
+                return new Item(name,quantity,"weapon","+300 dmg, 150% chance to miss",RED);
             case "Tabis of Inexorable Torment":
                 return new Item(name,quantity,"feet","+18 dmg, +18% chance to hit",DARK_BLUE);
             case "Cage of Inexorable Torment":
@@ -295,7 +295,7 @@ class Item{
             case "Degenerate Star Tome":
                 return new Item(name,quantity,"weapon","+30 dmg for each degenerate star item, deal 2.00x dmg on the first of every 5 attacks",RED);
             case "Cape of the Neutron Star":
-                return new Item(name,quantity,"back","1600% dmg every 47 attacks",DARK_BLUE);
+                return new Item(name,quantity,"back","1600% dmg every 45 attacks",DARK_BLUE);
             case "Cape of the White Dwarf":
                 return new Item(name,quantity,"back","300% dmg every 9 attacks",GREEN);
             case "Magnetar Pendant":
