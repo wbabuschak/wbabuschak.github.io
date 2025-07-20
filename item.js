@@ -34,11 +34,14 @@ class Item{
     }
 
     static createItem(name, quantity){
+        if (!name || !quantity){
+            return null;
+        }
         switch (name){
             case "Gold Coin":
                 return new Item(name,quantity,null,null,GOLD);
             case "Platinum Coin":
-                return new Item(name,quantity,null,null,GRAY);
+                return new Item(name,quantity,null,null,GOLD);
             case "Token of Faith":
                 return new Item(name,quantity,null,null,LIGHT_BLUE);
             case "Water Jar":
@@ -114,7 +117,7 @@ class Item{
             case "Mote of Arcane Power":
                 return new Item(name,quantity,"finger","+40% chance to hit, -20% dmg",RED);
             case "Nature's Wrath":
-                return new Item(name,quantity,"weapon","+18 dmg", "6% dmg", "+9% chance to hit", RED);
+                return new Item(name,quantity,"weapon","+18 dmg, 6% dmg, +9% chance to hit", RED);
             case "Ice Bear Paw Mitts":
                 return new Item(name,quantity,"hands","+5 dmg",GREEN);
             case "Frozen Gemstone Amulet":
@@ -152,7 +155,7 @@ class Item{
             case "Ratkickers":
                 return new Item(name,quantity,"feet","6% dmg",GREEN);
             case "Greedy Goldgrubber Grips":
-                return new Item(name,quantity,"hands","spawns treasure goblins",PURPLE);
+                return new Item(name,quantity,"hands","spawns treasure goblins",GRAY);
             case "Gold Cloak":
                 return new Item(name,quantity,"back","+1 dmg, 1% dmg, 1.01x dmg, +1% chance to hit",DARK_BLUE);
             case "First Seal":
@@ -186,7 +189,7 @@ class Item{
             case "Arcane Circuitboard":
                 return new Item(name,quantity,"trinket","8% dmg every 3 attacks",RED);
             case "Arcane Iris":
-                return new Item(name,quantity,"amulet","-10% dmg, your attacks that would miss deal half damage",RED);
+                return new Item(name,quantity,"amulet","-10% dmg, your attacks that would miss deal 40% dmg",RED);
             case "Arcane Shield":
                 return new Item(name,quantity,"off-hand","5% dmg, +10% chance to hit",RED);
             case "Arcane Phylactery":
@@ -205,6 +208,114 @@ class Item{
                 return new Item(name,quantity,"weapon","+50 dmg, 10% dmg",GREEN);
             case "Nebula Gemstone":
                 return new Item(name,quantity,"amulet","50% dmg every 2 attacks",GREEN);
+            // volcano planet world items
+            case "Volcano Badge":
+                return new Item(name,quantity,"trinket","10% dmg, +10% chance to hit",GREEN);
+            case "Kor'As, Obliteration Blade":
+                return new Item(name,quantity,"weapon","+113 dmg, 48% dmg",RED);
+            case "Heart of Molten Giant":
+                return new Item(name,quantity,"amulet","48% dmg, 11% chance to miss",DARK_BLUE);
+            case "Eye of Molten Giant":
+                return new Item(name,quantity,"finger","24% dmg, 7% chance to miss",GREEN);
+            case "Destroyer Greaves":
+                return new Item(name,quantity,"feet","1.2x dmg",RED);
+            case "Signet of Trembling":
+                return new Item(name,quantity,"finger","18% dmg, +18% chance to hit",DARK_BLUE);
+            case "Deep Black Mask":
+                return new Item(name,quantity,"head","60% dmg if wearing The Obsidian Band",RED);
+            case "The Obsidian Band":
+                return new Item(name,quantity,"finger","does nothing",DARK_BLUE);
+            case "Sulfur Respirator":
+                return new Item(name,quantity,"head","+10 dmg, 2% damage every attack, resets after 6",RED);
+            case "Horn of Doom":
+                return new Item(name,quantity,"off-hand","1.06x dmg",DARK_BLUE);
+            case "Lava Scorpion Exoskeleton":
+                return new Item(name,quantity,"chest","100% dmg if no head, hands, or feet weapon equipped",RED);
+            case "Amulet of Vitriolic Withering":
+                return new Item(name,quantity,"amulet","+10% chance to hit every attack, resets after 10",DARK_BLUE);
+            case "Steps of Worldshaking":
+                return new Item(name,quantity,"feet","+20 dmg",DARK_BLUE);
+            // pleasure world items
+            case "Mysterious Pleasure Juice":
+                return new Item(name,quantity,"trinket","0-30% dmg",GREEN);
+            case "Ak'lop, Incineration Wand":
+                return new Item(name,quantity,"weapon","+20 dmg + 20% dmg every attack, resets after 10",RED);
+            case "Chaos Vambrace":
+                return new Item(name,quantity,"hands","+0-30 dmg",DARK_BLUE);
+            case "Chaos Blade":
+                return new Item(name,quantity,"weapon","+90 dmg, 90% dmg",GREEN);
+            case "Cape of Cunning":
+                return new Item(name,quantity,"back","1.2x dmg on first attack",DARK_BLUE);
+            case "Overtuned Grippers":
+                return new Item(name,quantity,"hands","60% dmg, -10% every attack, resets after 6",RED);
+            case "Flesh Den Entry Token":
+                return new Item(name,quantity,"trinket","+6 dmg, +9% chance to hit",DARK_BLUE);
+            case "Dual-purpose Cane":
+                return new Item(name,quantity,"off-hand","+10 dmg, +10% chance to hit",RED);
+            case "Off-world Beast Fur Shawl":
+                return new Item(name,quantity,"chest","+40 dmg",DARK_BLUE);
+            case "Hyper Cutter":
+                return new Item(name,quantity,"off-hand","+21 dmg, 10% chance to miss", RED);
+            case "Ambush Sensor":
+                return new Item(name,quantity,"off-hand","1.1x dmg, your first attack can't miss",DARK_BLUE);
+            case "Badass Cloak":
+                return new Item(name,quantity,"back","30% dmg",RED);
+            case "Reworked Goblin Tech":
+                return new Item(name,quantity,"helmet","+0-50 dmg on first attack",RED);
+            // A.M. world items
+            case "Electric Eye":
+                return new Item(name,quantity,"trinket","+1 dmg every attack, resets after 33",GREEN);
+            case "Gar'Ahan, Fleshstripper":
+                return new Item(name,quantity,"weapon","+300 dmg, 100% chance to miss",RED);
+            case "Tabis of Inexorable Torment":
+                return new Item(name,quantity,"feet","+18 dmg, +18% chance to hit",DARK_BLUE);
+            case "Cage of Inexorable Torment":
+                return new Item(name,quantity,"head","40% dmg, your first attack always misses",GREEN);
+            case "Perfect Diamond Amulet":
+                return new Item(name,quantity,"amulet","+30% chance to hit",DARK_BLUE);
+            case "Ring of the Unbroken Stare":
+                return new Item(name,quantity,"finger","40% dmg after 8 attacks",RED);
+            case "Symbol of Everlasting Humanity":
+                return new Item(name,quantity,"trinket","1.1x dmg after 10 attacks, 1.2x dmg after 20 attacks",DARK_BLUE);
+            case "Butcher's Apron":
+                return new Item(name,quantity,"chest","40% dmg every 2 attacks, +10 dmg every 4 attacks",RED);
+            case "Inexplicable Ribs":
+                return new Item(name,quantity,"chest","60% dmg, 16% chance to miss",DARK_BLUE);
+            case "Damaged Exosuit":
+                return new Item(name,quantity,"chest","50% chance to hit after 10 attacks, 100% chance to hit after 20 attacks", RED);
+            case "Slicing Gloves":
+                return new Item(name,quantity,"hands","base damage is always 100",DARK_BLUE);
+            case "Repurposed Digital Gauge":
+                return new Item(name,quantity,"finger","0.1% dmg for each Dreadbeast Trophy, up to 40%",RED);
+            case "Strangler Mitts":
+                return new Item(name,quantity,"hands","attacks without a weapon can't miss",RED);
+             // stellar remnant world items
+            case "Collapse Clasp":
+                return new Item(name,quantity,"waist","30% dmg",GREEN);
+            case "Degenerate Star Tome":
+                return new Item(name,quantity,"weapon","+30 dmg for each degenerate star item, deal 2.00x dmg on the first of every 5 attacks",RED);
+            case "Cape of the Neutron Star":
+                return new Item(name,quantity,"back","1600% dmg every 47 attacks",DARK_BLUE);
+            case "Cape of the White Dwarf":
+                return new Item(name,quantity,"back","300% dmg every 9 attacks",GREEN);
+            case "Magnetar Pendant":
+                return new Item(name,quantity,"amulet","+23 dmg",DARK_BLUE);
+            case "Degenerate Star Boots":
+                return new Item(name,quantity,"feet","+30 dmg for each degenerate star item, deal 2.00x dmg on the second of every 5 attacks",RED);
+            case "Impossibly Dense Chain":
+                return new Item(name,quantity,"amulet","56% dmg, 14% chance to miss",DARK_BLUE);
+            case "Degenerate Star Belt":
+                return new Item(name,quantity,"waist","+30 dmg for each degenerate star item, deal 2.00x dmg on the third of every 5 attacks",RED);
+            case "Anti-matter Aegis":
+                return new Item(name,quantity,"off-hand","+10 dmg every attack, resets after 4",DARK_BLUE);
+            case "Degenerate Star Hood":
+                return new Item(name,quantity,"head","+30 dmg for each degenerate star item, deal 2.00x dmg on the fourth of every 5 attacks", RED);
+            case "Ion Chimes":
+                return new Item(name,quantity,"off-hand","+50% chance to hit every 2 attacks, 50% dmg every 4 attacks",DARK_BLUE);
+            case "Degenerate Star Coat":
+                return new Item(name,quantity,"chest","+30 dmg for each degenerate star item, deal 2.00x dmg on the fifth of every 5 attacks",RED);
+            case "Stolen Hope":
+                return new Item(name,quantity,"trinket","1% dmg every attack, resets after 50 attacks",RED);
             default:
                 return new Item(name,quantity);
         }

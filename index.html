@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.3b</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.3b</h1>
+    <title>EPIC RPG FIGHT GAME v0.0.4</title>
+    <h1>EPIC RPG FIGHT GAME v0.0.4</h1>
     <p>By William Babuschak</p>
     <button id="saveButton">Save Game Data</button>
     <p></p>
     <button id="attackButton">Attack!</button>
+    <button id="autoButton">Auto</button>
     <p></p>
-    <button id="autoButton">RSI Mode</button>
+    
     <select id="worldSelect"></select>
     <button id="resetButton">Reset Save Data</button>
         
@@ -40,6 +41,10 @@
             font-size: 36px;
             padding: 12px 24px;
         }
+        #autoButton {
+            font-size: 36px;
+            padding: 12px 2px;
+        }
         #resetButton {
             position: absolute;
             top: 0;
@@ -54,7 +59,19 @@
         let autoMode = false;
         let autoInterval;
         let attackCount = 0;
+        let enemyAttacks = 0;
         let lastHits = [];
+
+        let precomputedDamage = {
+            baseDmg: 1,
+            dmgMult: 1.0,
+            moreMult: 1.0,
+            missChance: 0.0,
+            missMult: 0.0,
+            arcaneCount: 0,
+            arcaneSetBonus: 0,
+            setBase: -1
+        };
 
         function updateInventory(){
             const inventoryElement = document.getElementById("inventory");
@@ -66,6 +83,7 @@
             updateEquipSelect();
             updateUnequipSelect();
             updateWorldSelect();
+            saveGame();
         }
         function updateEquipped(){
             const equippedElement = document.getElementById("equippedItems");
@@ -173,8 +191,17 @@
 
             // space world
             let starJars = inventory.items.find(i => i.name == "Arcane Star Jar");
-            if (thirdSeal && starJars.quantity >= 10){
+            if (starJars && starJars.quantity >= 10){
                 worlds.push(10);
+            }
+
+            let universalCredit = inventory.items.find(i => i.name == "Universal Credit");
+
+            if (universalCredit){
+                if (universalCredit.quantity >= 10) worlds.push(11);
+                if (universalCredit.quantity >= 100) worlds.push(12);
+                if (universalCredit.quantity >= 1000) worlds.push(13);
+                if (universalCredit.quantity >= 10000) worlds.push(14);
             }
 
             for (const world of worlds) {
@@ -224,6 +251,7 @@
             if (lastHit > -1) addToLastHits(lastHit);
             if (lastHits.length == 0){
                 document.getElementById("dpsDisplay").innerHTML = "0 average dmg"
+                return;
             }
             let cumDamage = 0;
             
@@ -249,7 +277,7 @@
 
             for (let i of equipped){
                 if (i.equippable == item.equippable){
-                    inventory.addItem(new Item(i.name, 1, i.equippable, i.desc, i.color));
+                    inventory.addItem(Item.createItem(i.name, 1));
                     equipped = equipped.filter(e => e !== i);
                 }
             }
@@ -257,11 +285,12 @@
             item.quantity -= 1;
             if(item.quantity == 0) inventory.items = inventory.items.filter(i => i.name !== itemName);
 
-            equipped.push(new Item(item.name, 1, item.equippable, item.desc, item.color));
+            equipped.push(Item.createItem(item.name, 1));
             // console.log("equipped " + itemName);
             updateInventory();
             updateEquipped();
             updateWorldSelect();
+            computeLoadoutStats();
         }
 
         function itemEquipped(name){
@@ -279,15 +308,285 @@
                 return;
             }
             equipped = equipped.filter(i => i != item);
-            inventory.addItem(new Item(item.name, 1, item.equippable, item.desc, item.color));
+            inventory.addItem(Item.createItem(item.name, 1));
             updateInventory();
             updateEquipped();
             updateWorldSelect();
+            computeLoadoutStats();
+        }
+
+        function computeLoadoutStats(){
+            let dmg = 1;
+            let dmg_mult = 1.0;
+            let more_mult = 1.0;
+            let miss_chance = 0.0;
+            let miss_mult = 0;
+            let arcane_count = 0;
+            let arcane_setbonus = 0;
+            let star_count = 0;
+            let set_base = -1;
+
+            // static item effects
+            for (let i of equipped){
+                if (i.name == "Common Dagger") dmg += 3;
+                if (i.name == "Ring of Slaying") dmg += 1;
+                if (i.name == "Epic Sword") dmg += 7;
+                if (i.name == "Fearsome Kris") dmg += 8;
+                if (i.name == "Mummy Wraps") dmg_mult += 0.10;
+                if (i.name == "Havoc Blade"){
+                    dmg_mult += 0.30;
+                    dmg += 3;
+                }
+                if (i.name == "Haunting Guise" && !itemInSlot("weapon")){
+                    dmg_mult += 0.50;
+                }
+                if (i.name == "Ring of Venom") dmg_mult += 0.10;
+                if (i.name == "Gauntlets of Sheer Force") set_base = 10;
+                if (i.name == "Emesis Amulet"){
+                    miss_chance += 0.09;
+                    dmg_mult += 0.09;
+                    dmg += 9;
+                }
+                if (i.name == "Crown of the Corpseeater") dmg_mult += 0.11;
+                if (i.name == "Wraps of Temptation"){
+                    dmg_mult += 0.23;
+                    miss_chance += .10;
+                }
+                if (i.name == "Blade of One Thousand Hooks") dmg_mult += 0.66;
+                if (i.name == "Stone of James") more_mult += 0.10;
+                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.09;
+                if (i.name == "Fossil Blade") dmg += 20;
+                if (i.name == "Tooth Necklace") dmg += 6;
+                if (i.name == "Killer Gloves") dmg_mult += 0.03;
+                if (i.name == "Blasting Wand") dmg += 10;
+                if (i.name == "Ice Bear Fur Shawl") dmg += 10;
+                if (i.name == "Terror Mask") miss_chance -= 0.20;
+                if (i.name == "Dread Loop"){
+                    set_base = 16;
+                    miss_chance += 0.16;
+                }
+                if (i.name == "Mote of Arcane Power"){
+                    miss_chance -= 0.40;
+                    dmg_mult -= 0.20;
+                }
+                if (i.name == "Nature's Wrath"){
+                    dmg += 18;
+                    miss_chance -= 0.09;
+                    dmg_mult += 0.06;
+                }
+                if (i.name == "Ice Bear Paw Mitts") dmg += 6;
+                if (i.name == "Frozen Gemstone Amulet") dmg += 6;
+                if (i.name == "Baby Dragon Fang") dmg_mult += 0.13;
+                if (i.name == "Juvenile Dragon Talon") dmg += 33;
+                if (i.name == "Green Dragonscale Cape") dmg_mult += 0.07;
+                if (i.name == "Black Dragonscale Cape"){
+                    more_mult += 0.10;
+                    miss_chance += 0.07;
+                }
+                if (i.name == "Blue Dragonscale Cape") dmg += 7;
+                if (i.name == "Dragonheart Piercer"){
+                    dmg_mult += 0.07;
+                    dmg += 26;
+                }
+                if (i.name == "Devastating Crossbow"){
+                    miss_chance -= 10000.0;
+                    dmg += 21;
+                }
+                if (i.name == "Snake-eye Chain") dmg += 2;
+                if (i.name == "Skullstompers") dmg += 1;
+                if (i.name == "Devious Dagger"){
+                    dmg += 6;
+                    dmg_mult += 0.16;
+                };
+                if (i.name == "Ratkickers") dmg_mult += .06;
+                if (i.name == "Gold Cloak"){
+                    dmg += 1;
+                    dmg_mult += 0.01;
+                    more_mult += 0.01;
+                    miss_chance -= 0.01;
+                };
+                if (i.name == "Ring of Greed"){
+                    dmg_mult += 0.40;
+                }
+                // Arcane items
+                if (i.name.includes("Arcane")){
+                    arcane_count++;
+                    if (i.name.includes("Helmet") || i.name.includes("Vest") || i.name.includes("Gauntlets") || i.name.includes("Treads") || i.name.includes("Staff")){
+                        dmg += 7;
+                        arcane_setbonus++;
+                    }
+                    if (i.name == "Arcane Phylactery") {
+                        dmg_mult += 0.18;
+                        miss_chance += 0.10;
+                    }
+                    if (i.name == "Arcane Shield") {
+                        dmg_mult += 0.05;
+                        miss_chance -= 0.10;
+                    }
+                    if (i.name == "Arcane Iris") {
+                        dmg_mult -= 0.10;
+                        miss_mult = 0.4;
+                    }
+                    if (i.name == "Arcane Focusing Gem") {
+                        more_mult += 0.13;
+                    }
+                }
+                if (i.name == "Astral Hammer"){
+                    dmg += 100;
+                    miss_chance += 0.50;
+                }
+                if (i.name == "Moon Blasting Super Smashers") set_base = 40;
+                if (i.name == "Laser Gigawatt Charger"){
+                    if (itemEquipped("Astral Hammer") || itemEquipped("Laser-powered Goblin Smasher") || itemEquipped("Green Laser Blaster") || itemEquipped("Grey Laser Blaster")){
+                        dmg_mult += 0.30;
+                    }
+                }
+                if (i.name == "Laser-powered Goblin Smasher") dmg += 22;
+                if (i.name == "Green Laser Blaster") dmg += 55;
+                if (i.name == "Grey Laser Blaster"){
+                    dmg += 50;
+                    dmg_mult += 0.10;
+                }
+
+                // volcano planet world items
+
+                if (i.name == "Volcano Badge"){
+                    dmg_mult += 0.10;
+                    miss_chance -= 0.10;
+                }
+                if (i.name == "Kor'As, Obliteration Blade"){
+                    dmg += 113;
+                    dmg_mult += 0.48;
+                }
+                if (i.name == "Heart of Molten Giant"){
+                    dmg_mult += 0.48;
+                    miss_chance += 0.11;
+                }
+                if (i.name == "Eye of Molten Giant"){
+                    dmg_mult += 0.24;
+                    miss_chance += 0.07;
+                }
+                if (i.name == "Destroyer Greaves"){
+                    more_mult += 0.20;
+                }
+                if (i.name == "Signet of Trembling"){
+                    dmg_mult += 0.18;
+                    miss_chance -= 0.18;
+                }
+                if (i.name == "Deep Black Mask"){
+                    if (itemEquipped("The Obsidian Band")){
+                        dmg_mult += 0.60;
+                    }
+                }
+                if (i.name == "Sulfur Respirator") dmg += 10;
+                    
+                if (i.name == "Horn of Doom") more_mult += 0.06;
+                if (i.name == "Lava Scorpion Exoskeleton"){
+                    if (!itemInSlot("head") && !itemInSlot("feet") && !itemInSlot("hands")){
+                        dmg_mult += 1.00;
+                    }
+                }
+                if (i.name == "Steps of Worldshaking") dmg += 20;
+
+                // pleasure world items
+                if (i.name == "Chaos Blade"){
+                    dmg += 90;
+                    dmg_mult += 0.90;
+                }
+                if (i.name == "Overtuned Grippers") dmg_mult += 0.60;
+                if (i.name == "Flesh Den Entry Token"){
+                    dmg += 6;
+                    miss_chance -= 0.09;
+                }
+                if (i.name == "Dual-purpose Cane"){
+                    dmg += 10;
+                    miss_chance -= 0.10;
+                }
+                if (i.name == "Off-world Beast Fur Shawl") dmg += 40;
+                if (i.name == "Hyper Cutter"){
+                    dmg += 21;
+                    miss_chance += 0.10;
+                }
+                if (i.name == "Badass Cloak") dmg_mult += 0.30;
+                if (i.name == "Ambush Sensor") more_mult += 0.10;
+                if (i.name == "Gar'Ahan, Fleshstripper"){
+                    dmg += 300;
+                    miss_chance += 1.00;
+                }
+                if (i.name == "Tabis of Inexorable Torment"){
+                    dmg += 18;
+                    miss_chance -= 0.18;
+                }
+                if (i.name == "Cage of Inexorable Torment") dmg_mult += 0.40;
+                if (i.name == "Perfect Diamond Amulet") miss_chance -= 0.30;
+                if (i.name == "Inexplicable Ribs"){
+                    dmg_mult += 0.60;
+                    miss_chance += 0.16;
+                }
+                if (i.name == "Slicing Gloves") baseDmg = 100;
+                if (i.name == "Strangler Mitts"){
+                    if (!itemInSlot("weapon")){
+                        miss_chance -= 10000.0;
+                    }
+                }
+                if (i.name == "Collapse Clasp") dmg_mult += 0.30;
+                // Degenerate Star items
+                if (i.name.includes("Degenerate Star")){
+                    star_count++;
+                }
+                if (i.name == "Magnetar Pendant") dmg += 23;
+                if (i.name == "Impossibly Dense Chain"){
+                    dmg_mult += 0.56;
+                    miss_chance += 0.14;
+                }
+                
+            }
+
+            dmg += (star_count * star_count * 30);
+            dmg_mult += (arcane_count * arcane_setbonus * 0.03);
+            if (set_base !== -1) dmg = set_base;
+
+            precomputedDamage = {
+                baseDmg: dmg,
+                dmgMult: dmg_mult,
+                moreMult: more_mult,
+                missChance: miss_chance,
+                missMult: miss_mult,
+                arcaneCount: arcane_count,
+                arcaneSetBonus: arcane_setbonus,
+                setBase: set_base
+            };
+            // console.log(precomputedDamage);
         }
 
         function worldName(i){
-            worlds = ["Default World", "Spirit World", "Desert World", "Hell World", "Ice World", "Dragon Swamp World", "Gold World", "Default World (Part 2)", "Magic World", "Space World"];
+            worlds = [
+            "Default World", 
+            "Spirit World", 
+            "Desert World", 
+            "Hell World", 
+            "Ice World", 
+            "Dragon Swamp World", 
+            "Gold World", 
+            "Default World (Part 2)", 
+            "Magic World", 
+            "Space World",
+            "Volcano Planet World",
+            "Pleasure World",
+            "A.M. World",
+            "Stellar Remnant World",
+            "Myth World",
+            ];
             return worlds[i];
+        }
+
+        function itemInSlot(slot){
+            for (let item of equipped){
+                if (item.equippable == slot){
+                    return item;
+                }
+            }
+            return null;
         }
 
         function saveGame() {
@@ -314,6 +613,7 @@
             updateInventory();
             updateEquipped();
             updateWorldSelect();
+            computeLoadoutStats();
         }
 
         let worldTimer = 0;
@@ -340,8 +640,10 @@
             let hit = attackDamage();
             activeEntity.damage(hit, inventory);
             attackCount++;
+            enemyAttacks++;
             if (activeEntity.destroyed){
                 activeEntity = randomEnemy(Number(worldSelect.value));
+                enemyAttacks = 0;
                 updateInventory();
             } 
             updateEntityDisplay(hit);
@@ -379,204 +681,167 @@
 
     <script>
         function attackDamage(){
-            let dmg = 1;
-            let dmg_mult = 1.0;
-            let set_base = -1;
-            let more_mult = 1.0;
-            let miss_chance = 0.0;
-            let arcane_count = 0;
-            let arcane_setbonus = 0;
-            let miss_mult = 0;
+            let { baseDmg, dmgMult, moreMult, missChance, missMult } = precomputedDamage;
+            let dmg = baseDmg;
+            
+            // item procs
             for (let i of equipped){
-                if (i.name == "Common Dagger") dmg += 3;
-                if (i.name == "Ring of Slaying") dmg += 1;
-                if (i.name == "Epic Sword") dmg += 7;
-                if (i.name == "Fearsome Kris") dmg += 8;
-                if (i.name == "Mummy Wraps") dmg_mult += 0.10;
-                if (i.name == "Havoc Blade"){
-                    dmg_mult += 0.30;
-                    dmg += 3;
-                };
-                if (i.name == "Haunting Guise"){
-                    if (!itemInSlot("weapon")){
-                        dmg_mult += 0.50;
-                    }
-                };
-                if (i.name == "Ring of Venom") dmg_mult += 0.10;
                 if (i.name == "Stormstrike"){
-                    if (Math.random() > .5){
-                        dmg_mult += 1.00;
-                    } else {
-                         dmg_mult -= 1.00;
-                    }
-                };
-                if (i.name == "Gauntlets of Sheer Force") set_base = 10;
-                if (i.name == "Emesis Amulet"){
-                    miss_chance += 0.09;
-                    dmg_mult += 0.09;
-                    dmg += 9;
+                    dmgMult += Math.random() > 0.5 ? 1.00 : -1.00;
                 }
-                if (i.name == "Crown of the Corpseeater") dmg_mult += 0.11;
-                if (i.name == "Wraps of Temptation"){
-                    dmg_mult += 0.23;
-                    miss_chance += .10;
+                if (i.name == "Red Dragonscale Cape" && attackCount % 7 == 0){
+                    dmgMult += 1.00;
                 }
-                if (i.name == "Blade of One Thousand Hooks") dmg_mult += 0.66;
-                if (i.name == "Stone of James") more_mult += 0.10;
-                if (i.name == "Treads of Crushing Depths") dmg_mult += 0.09;
-                if (i.name == "Fossil Blade") dmg += 20;
-                if (i.name == "Tooth Necklace") dmg += 6;
-                if (i.name == "Killer Gloves") dmg_mult += 0.03;
-                if (i.name == "Blasting Wand") dmg += 10;
-                if (i.name == "Ice Bear Fur Shawl") dmg += 10;
-                if (i.name == "Terror Mask") miss_chance -= 0.20;
-                if (i.name == "Dread Loop"){
-                    set_base = 16;
-                    miss_chance += 0.16;
+                if (i.name == "Dragon Mucus Tincture" && attackCount % 7 == 0){
+                    dmgMult += 0.10;
                 }
-                if (i.name == "Mote of Arcane Power"){
-                    miss_chance -= 0.40;
-                    dmg_mult -= 0.20;
+                if (i.name == "Goblin Ledger"){
+                    dmgMult += 0.01 * (attackCount % 12);
                 }
-                if (i.name == "Nature's Wrath"){
-                    dmg += 18;
-                    miss_chance -= 0.09;
-                    dmg_mult -+ 0.06;
+                if (i.name == "Nebula Gemstone" && attackCount % 2 == 0){
+                    dmgMult += 0.50;
                 }
-                if (i.name == "Ice Bear Paw Mitts") dmg += 6;
-                if (i.name == "Frozen Gemstone Amulet") dmg += 6;
-                if (i.name == "Baby Dragon Fang") dmg_mult += 0.13;
-                if (i.name == "Juvenile Dragon Talon") dmg += 33;
-                if (i.name == "Green Dragonscale Cape") dmg_mult += 0.07;
-                if (i.name == "Black Dragonscale Cape"){
-                    more_mult += 0.10;
-                    miss_chance += 0.07;
+                if (i.name == "Laser-powered Goblin Smasher" && attackCount % 3 == 0){
+                    moreMult += 1.00;
                 }
-                if (i.name == "Blue Dragonscale Cape") dmg += 7;
-                if (i.name == "Red Dragonscale Cape"){
-                    if (attackCount % 7 == 0) dmg_mult += 1.00;
+                if (i.name == "Arcane Circuitboard" && attackCount % 3 == 0){
+                    dmgMult += 0.08;
                 }
-                if (i.name == "Dragon Mucus Tincture"){
-                    if (attackCount % 7 == 0) dmg_mult += 0.10;
+                if (i.name == "Ring of Greed" && attackCount % 4 == 0){
+                    missChance += 1000.0;
                 }
-                if (i.name == "Dragonheart Piercer"){
-                    dmg_mult += 0.07;
-                    dmg += 26;
+                if (i.name == "Headcracker Mitts"){
+                    dmg += 1 + Math.floor(Math.random() * 12);
                 }
-                if (i.name == "Devastating Crossbow"){
-                    miss_chance -= 10000.0;
-                    dmg += 21;
+                if (i.name == "Mysterious Pleasure Juice"){
+                    dmgMult += Math.random() * 0.30;
                 }
-                if (i.name == "Snake-eye Chain") dmg += 2;
-                if (i.name == "Headcracker Mitts") dmg += 1 + Math.floor(Math.random() * 12);
-                if (i.name == "Ring of Greed"){
-                    dmg_mult += 0.40;
-                    if (attackCount % 4 == 0) miss_chance += 1000.0;
+                if (i.name == "Ak'lop, Incineration Wand"){
+                    dmg += 20 * (attackCount % 10);
+                    dmgMult += 0.20 * (attackCount % 10);
                 }
-                if (i.name == "Goblin Ledger") dmg_mult += 0.01 * (attackCount % 12);
-                if (i.name == "Skullstompers") dmg += 1;
-                if (i.name == "Devious Dagger"){
-                    dmg += 6;
-                    dmg_mult += 0.16;
-                };
-                if (i.name == "Ratkickers") dmg_mult += .06;
-                if (i.name == "Gold Cloak"){
-                    dmg += 1;
-                    dmg_mult += 0.01;
-                    more_mult += 0.01;
-                    miss_chance -= 0.01;
-                };
-                if (i.name == "Helmet of Arcane Protection"){
-                    dmg += 7;
-                    arcane_count++;
-                    arcane_setbonus++;
+                if (i.name == "Chaos Vambrace"){
+                    dmg += Math.floor(Math.random() * 31);
                 }
-                if (i.name == "Vest of Arcane Devotion"){
-                    dmg += 7;
-                    arcane_count++;
-                    arcane_setbonus++;
-                }
-                if (i.name == "Gauntlets of Arcane Postmultiplication"){
-                    dmg += 7;
-                    arcane_count++;
-                    arcane_setbonus++;
-                }
-                if (i.name == "Treads of Arcane Stabilization"){
-                    dmg += 7;
-                    arcane_count++;
-                    arcane_setbonus++;
-                }
-                if (i.name == "Staff of Arcane Domination"){
-                    dmg += 7;
-                    arcane_count++;
-                    arcane_setbonus++;
-                }
-                if (i.name == "Arcane Phylactery"){
-                    dmg_mult += 0.18;
-                    miss_chance += 0.10;
-                    arcane_count++;
-                }
-                if (i.name == "Arcane Shield"){
-                    dmg_mult += 0.05;
-                    miss_chance -= 0.10;
-                    arcane_count++;
-                }
-                if (i.name == "Arcane Iris"){
-                    dmg_mult -= 0.10;
-                    miss_mult = 0.5;
-                    arcane_count++;
-                }
-                if (i.name == "Arcane Circuitboard"){
-                    if (attackCount % 3 == 0) dmg_mult += 0.08;
-                    arcane_count++;
-                }
-                if (i.name == "Arcane Focusing Gem"){
-                    more_mult += 0.13;
-                    arcane_count++;
-                }
-                if (i.name == "Astral Hammer"){
-                    dmg += 100;
-                    miss_chance += 0.50;
-                }
-                if (i.name == "Moon Blasting Super Smashers") set_base = 40;
-                if (i.name == "Laser Gigawatt Charger"){
-                    if (itemEquipped("Astral Hammer") || itemEquipped("Laser-powered Goblin Smasher") || itemEquipped("Green Laser Blaster") || itemEquipped("Grey Laser Blaster")){
-                        dmg_mult += 0.30;
+                if (i.name == "Cape of Cunning"){
+                    if (enemyAttacks == 0){
+                        moreMult += 0.20;
                     }
                 }
-                if (i.name == "Laser-powered Goblin Smasher"){
-                    dmg += 22;
-                    if (attackCount % 3 == 0){
-                        more_mult += 1.00;
+                if (i.name == "Overtuned Grippers"){
+                    dmgMult -= 0.10 * (attackCount % 6);
+                }
+                if (i.name == "Ambush Sensor"){
+                    if (enemyAttacks == 0){
+                        missChance -= 10000.0;
                     }
                 }
-                if (i.name == "Green Laser Blaster") dmg += 55;
-                if (i.name == "Grey Laster Blaster"){
-                    dmg += 50;
-                    dmg_mult += 0.10;
+                if (i.name == "Reworked Goblin Tech"){
+                    if (enemyAttacks == 0){
+                        dmg += Math.floor(Math.random() * 51);
+                    }
                 }
-                if (i.name == "Nebula Gemstone"){
+                if (i.name == "Electric Eye"){
+                    dmg += 1 * (attackCount % 33);
+                }
+                if (i.name == "Cage of Inexorable Torment"){
+                    if (enemyAttacks == 0){
+                        missChance += 1000.0;
+                    }
+                }
+                if (i.name == "Ring of the Unbroken Stare"){
+                    if (enemyAttacks > 7){
+                        dmgMult += 0.40;
+                    }
+                }
+                if (i.name == "Symbol of Everlasting Humanity"){
+                    if (enemyAttacks > 9){
+                        moreMult += 0.10;
+                        if (enemyAttacks > 19){
+                            moreMult += 0.10;
+                        }
+                    }
+                }
+                if (i.name == "Butcher's Apron"){
                     if (attackCount % 2 == 0){
-                        dmg_mult += 0.50;
+                        dmgMult += 0.40;
+                        if (attackCount % 4 == 0){
+                            dmg += 10;
+                        }
                     }
+                }
+                if (i.name == "Damaged Exosuit"){
+                    if (attackCount > 9){
+                        missChance -= 0.50;
+                        if (attackCount > 19){
+                            missChance -= 0.50;
+                        }
+                    }
+                }
+                if (i.name == "Repurposed Digital Gauge"){
+                    let trophies = inventory.items.find(i => i.name == "Dreadbeast Trophy");
+                    if (trophies){
+                        dmg_mult += .001 * trophies.quantity;
+                    }
+                }
+                if (i.name == "Degenerate Star Tome"){
+                    if (attackCount % 5 == 0){
+                        moreMult += 1.00;
+                    }
+                }
+                if (i.name == "Degenerate Star Boots"){
+                    if (attackCount % 5 == 1){
+                        moreMult += 1.00;
+                    }
+                }
+                if (i.name == "Degenerate Star Belt"){
+                    if (attackCount % 5 == 2){
+                        moreMult += 1.00;
+                    }
+                }
+                if (i.name == "Degenerate Star Hood"){
+                    if (attackCount % 5 == 3){
+                        moreMult += 1.00;
+                    }
+                }
+                if (i.name == "Degenerate Star Coat"){
+                    if (attackCount % 5 == 3){
+                        moreMult += 1.00;
+                    }
+                }
+                if (i.name == "Cape of the Neutron Star"){
+                    if (attackCount % 47 == 0){
+                        dmgMult += 16.00;
+                    }
+                }
+                if (i.name == "Cape of the White Dwarf"){
+                    if (attackCount % 9 == 0){
+                        dmgMult += 3.00;
+                    }
+                }
+                if (i.name == "Anti-matter Aegis"){
+                    dmg += 10 * (attackCount % 4)
+                }
+                if (i.name == "Ion Chimes"){
+                    if (attackCount % 2 == 0){
+                        missChance -= 0.50;
+                        if (attackCount % 4 == 0){
+                            dmgMult += 0.50;
+                        }
+                    }
+                }
+                if (i.name == "Stolen Hope"){
+                    dmgMult += 0.01 * (attackCount % 50)
                 }
             }
-            
-            dmg = set_base == -1 ? dmg : set_base;
-            dmg_mult += (arcane_count * arcane_setbonus * .03);
-            let miss = Math.random() < miss_chance;
-            if (miss) dmg *= miss_mult;
-            return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmg_mult) * Math.max(0.0, more_mult));
+
+            let miss = Math.random() < missChance;
+            if (miss) dmg *= missMult;
+
+            return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmgMult) * Math.max(0.0, moreMult));
         }
 
-        function itemInSlot(slot){
-            for (let item of equipped){
-                if (item.equippable == slot){
-                    return item;
-                }
-            }
-            return null;
-        }
+        
     </script>
 
     <script>
@@ -672,9 +937,45 @@
                     enemies.push(spawnEnemy("Moon Rock Golem"));
                     worldColor = "#7a748aff"
                     break;
+                case 11:
+                    enemies.push(spawnEnemy("Obsidian Sphere"));
+                    enemies.push(spawnEnemy("Lava Scorpion"));
+                    enemies.push(spawnEnemy("Magma Drinker"));
+                    enemies.push(spawnEnemy("Basalt Golem"));
+                    enemies.push(spawnEnemy("Fiery Dreadbeast"));
+                    enemies.push(spawnEnemy("Molten Giant"));
+                    worldColor = "#bb7a6aff"
+                    break;
+                case 12:
+                    enemies.push(spawnEnemy("Underworld Gangster"));
+                    enemies.push(spawnEnemy("Subterranean"));
+                    enemies.push(spawnEnemy("Chaos Infiltrator"));
+                    enemies.push(spawnEnemy("Alien Pimp"));
+                    enemies.push(spawnEnemy("Veiled Dreadbeast"));
+                    enemies.push(spawnEnemy("Uncompromising Hedonist"));
+                    worldColor = "#ee94c8ff"
+                    break;
+                case 13:
+                    enemies.push(spawnEnemy("Razor Spitter"));
+                    enemies.push(spawnEnemy("Warped Man"));
+                    enemies.push(spawnEnemy("Clanging Mechanotentacle"));
+                    enemies.push(spawnEnemy("Resurrected Meat-sludge"));
+                    enemies.push(spawnEnemy("Hairy Dreadbeast"));
+                    enemies.push(spawnEnemy("A.M. Plaything"));
+                    worldColor = "#b8d5e9ff"
+                    break;
+                case 14:
+                    enemies.push(spawnEnemy("Ion Breather"));
+                    enemies.push(spawnEnemy("Impact Survivor"));
+                    enemies.push(spawnEnemy("Plasma Junker"));
+                    enemies.push(spawnEnemy("Post-stellar Screamer"));
+                    enemies.push(spawnEnemy("Super Dreadbeast"));
+                    enemies.push(spawnEnemy("Student of Syzygy"));
+                    worldColor = "#bca3ccff"
+                    break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));
-                    worldColor
+                    worldColor = "#ffffff"
             }
             if (itemEquipped("Greedy Goldgrubber Grips")){
                 let fixedSize = enemies.length;

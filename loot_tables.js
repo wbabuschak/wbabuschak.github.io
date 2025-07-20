@@ -351,7 +351,8 @@ const giantAnacondaLootTable = new LootTable([
     Item.createItem("Rotten Meat", 1),
     Item.createItem("Snake-eye Chain", 1),
     Item.createItem("Second Seal", 1),
-    ],[4,8,12,13,12,11,10,9,8,7,6,2,1,1]
+    Item.createItem("Platinum Coin", 1),
+    ],[4,8,12,13,12,11,10,9,8,7,6,2,1,1,1]
 );
 
 const vaingloriousDragonHunter = new LootTable([
@@ -549,7 +550,6 @@ const moonRockGolemLootTable = new LootTable([
     ],[4,8,12,16,20,24,28,1,1]
 );
 
-
 const livingCometLootTable = new LootTable([
     Item.createItem("Useless Moon Rock", 7),
     Item.createItem("Useless Moon Rock", 6),
@@ -567,7 +567,7 @@ const greyLaserAlienLootTable = new LootTable([
     Item.createItem("Broken Laser Gun", 1),
     Item.createItem("Alien Sludge", 1),
     Item.createItem("Universal Credit", 1),
-    Item.createItem("Green Laser Blaster", 1),
+    Item.createItem("Grey Laser Blaster", 1),
     Item.createItem("Laser Gigawatt Charger", 1),
     ],[78,12,6,3,1]
 );
@@ -600,4 +600,306 @@ const superstellarSpaceRaiderLootTable = new LootTable([
     Item.createItem("Laser-powered Goblin Smasher", 1),
     Item.createItem("Laser Gigawatt Charger", 1),
     ],[50,23,15,13,5,2,1,1]
+);
+
+// VOLCANO PLANET WORLD
+
+const obsidianSphereLootTable = new LootTable([
+    Item.createItem("Rapidly Cooled Rock", 1),
+    Item.createItem("Rapidly Cooled Rock", 2),
+    Item.createItem("Rapidly Cooled Rock", 3),
+    Item.createItem("Trace Metal Ore", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("The Obsidian Band", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Deep Black Mask", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const lavaScorpionLootTable = new LootTable([
+    Item.createItem("Molten Shell Fragment", 1),
+    Item.createItem("Molten Shell Fragment", 2),
+    Item.createItem("Molten Shell Fragment", 3),
+    Item.createItem("Molted Shell Fragment", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Amulet of Vitrioltic Withering", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Lava Scorpion Exoskeleton", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const magmaDrinkerLootTable = new LootTable([
+    Item.createItem("Rapidly Cooled Rock", 2),
+    Item.createItem("Rapidly Cooled Rock", 3),
+    Item.createItem("Rapidly Cooled Rock", 4),
+    Item.createItem("Permineralization Skull Fragment", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Horn of Doom", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Sulfur Respirator", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const basaltGolemLootTable = new LootTable([
+    Item.createItem("Rapidly Cooled Rock", 3),
+    Item.createItem("Rapidly Cooled Rock", 4),
+    Item.createItem("Rapidly Cooled Rock", 5),
+    Item.createItem("Basaltic Fragment", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Signet of Trembling", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Destroyer Greaves", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const fieryDreadbeastLootTable = new LootTable([
+    Item.createItem("Molten Shell Fragment", 1),
+    Item.createItem("Molten Shell Fragment", 2),
+    Item.createItem("Molten Shell Fragment", 3),
+    Item.createItem("Dripping Fang", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Steps of Worldshaking", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Dreadbeast Trophy", 1),
+    ],[100,50,30,10,6,4,2,1]
+);
+
+const moltenGiantLootTable = new LootTable([
+    Item.createItem("Rapidly Cooled Rock", 4),
+    Item.createItem("Rapidly Cooled Rock", 5),
+    Item.createItem("Rapidly Cooled Rock", 6),
+    Item.createItem("Eye of Molten Giant", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Heart of Molten Giant", 1),
+    Item.createItem("Volcano Badge", 1),
+    Item.createItem("Kor'As, Obliteration Blade", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+// PLEASURE WORLD
+
+const underworldGangsterLootTable = new LootTable([
+    Item.createItem("", 1),
+    Item.createItem("", 2),
+    Item.createItem("", 3),
+    Item.createItem("", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const uncompromisingHedonistLootTable = new LootTable([
+    Item.createItem("Spoils of the Flesh", 1),
+    Item.createItem("Spoils of the Flesh", 2),
+    Item.createItem("Spoils of the Flesh", 3),
+    Item.createItem("Secret Tool", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Flesh Den Entry Token", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("Overtuned Grippers", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const alienPimpLootTable = new LootTable([
+    Item.createItem("Spoils of the Flesh", 2),
+    Item.createItem("Spoils of the Flesh", 3),
+    Item.createItem("Spoils of the Flesh", 4),
+    Item.createItem("Secret Tool", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Off-world Beast Fur Shawl", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("Dual-purpose Cane", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const subterraneanLootTable = new LootTable([
+    Item.createItem("Neutralized Anti-matter", 3),
+    Item.createItem("Neutralized Anti-matter", 4),
+    Item.createItem("Neutralized Anti-matter", 5),
+    Item.createItem("Sigil of the Survivor", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Ambush Sensor", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("Hyper Cutter", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const veiledDreadbeastLootTable = new LootTable([
+    Item.createItem("Essence of Twisting Nether", 31),
+    Item.createItem("Essence of Twisting Nether", 37),
+    Item.createItem("Essence of Twisting Nether", 41),
+    Item.createItem("Shadow Fang", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Cape of Cunning", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("Dreadbeast Trophy", 1),
+    ],[100,50,30,10,6,3,4,2,1]
+);
+
+const chaosInfiltratorLootTable = new LootTable([
+    Item.createItem("Essence of Twisting Nether", 41),
+    Item.createItem("Essence of Twisting Nether", 43),
+    Item.createItem("Essence of Twisting Nether", 47),
+    Item.createItem("Chaos Blade", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Chaos Vambrace", 1),
+    Item.createItem("Mysterious Pleasure Juice", 1),
+    Item.createItem("Ak'Olp, Incineration Wand", 1),
+    ],[50,25,15,5,3,3,2,1,1]
+);
+
+// A.M. WORLD
+
+const clangingMechanotentacleLootTable = new LootTable([
+    Item.createItem("Random Mechanojunk", 1),
+    Item.createItem("Random Mechanojunk", 2),
+    Item.createItem("Random Mechanojunk", 3),
+    Item.createItem("Perpetual Dynamo", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Strangler Mitts", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Repurposed Digital Gauge", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const razorSpitterLootTable = new LootTable([
+    Item.createItem("Random Mechanojunk", 2),
+    Item.createItem("Random Mechanojunk", 3),
+    Item.createItem("Random Mechanojunk", 4),
+    Item.createItem("Perpetual Dynamo", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Slicing Gloves", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Damaged Exosuit", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const resurrectedMeatSludgeLootTable = new LootTable([
+    Item.createItem("Destroyed Flesh", 2),
+    Item.createItem("Destroyed Flesh", 3),
+    Item.createItem("Destroyed Flesh", 4),
+    Item.createItem("Still-beating Heart", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Inexplicable Ribs", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Butcher's Apron", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const warpedManLootTable = new LootTable([
+    Item.createItem("Destroyed Flesh", 3),
+    Item.createItem("Destroyed Flesh", 4),
+    Item.createItem("Destroyed Flesh", 5),
+    Item.createItem("Soul Remnant", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Symbol of Everlasting Humanity", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Ring of the Unbroken Stare", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const hairyDreadbeastLootTable = new LootTable([
+    Item.createItem("Pile of Beast Fur", 31),
+    Item.createItem("Pile of Beast Fur", 37),
+    Item.createItem("Pile of Beast Fur", 41),
+    Item.createItem("Brutal Fang", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Perfect Diamond Amulet", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Dreadbeast Trophy", 1),
+    ],[100,50,30,10,6,3,4,2,1]
+);
+
+const amPlaythingLootTable = new LootTable([
+    Item.createItem("Broken Circuitry", 111),
+    Item.createItem("Broken Circuitry", 133),
+    Item.createItem("Broken Circuitry", 177),
+    Item.createItem("Cage of Inexorable Torment", 1),
+    Item.createItem("Universal Credit", 2),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Tabis of Inexorable Torment", 1),
+    Item.createItem("Electric Eye", 1),
+    Item.createItem("Gar'Ahan, Fleshstripper", 1),
+    ],[50,25,15,5,3,3,2,1,1]
+);
+
+// STELLAR REMNANT WORLD
+
+const impactSurvivorLootTable = new LootTable([
+    Item.createItem("Space Junk", 1),
+    Item.createItem("Space Junk", 2),
+    Item.createItem("Space Junk", 3),
+    Item.createItem("Element Collector", 1),
+    Item.createItem("Universal Credit", 1),
+    Item.createItem("Stolen Hope", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Degenerate Star Coat", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const ionBreatherLootTable = new LootTable([
+    Item.createItem("Solar Debris", 1),
+    Item.createItem("Solar Debris", 2),
+    Item.createItem("Solar Debris", 3),
+    Item.createItem("Element Collector", 1),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Ion Chimes", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Degenerate Star Hood", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const plasmaJunkerLootTable = new LootTable([
+    Item.createItem("Solar Debris", 2),
+    Item.createItem("Solar Debris", 3),
+    Item.createItem("Solar Debris", 4),
+    Item.createItem("Element Collector", 1),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Anti-matter Aegis", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Degenerate Star Belt", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const poststellarScreamerLootTable = new LootTable([
+    Item.createItem("Solar Debris", 3),
+    Item.createItem("Solar Debris", 4),
+    Item.createItem("Solar Debris", 5),
+    Item.createItem("Astral Essence", 1),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Impossibly Dense Chain", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Degenerate Star Boots", 1),
+    ],[50,25,15,5,3,2,1,1]
+);
+
+const superDreadbeastLootTable = new LootTable([
+    Item.createItem("Solar Debris", 4),
+    Item.createItem("Solar Debris", 5),
+    Item.createItem("Solar Debris", 6),
+    Item.createItem("Supermassive Fang", 1),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Universal Credit", 4),
+    Item.createItem("Magnetar Pendant", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Dreadbeast Trophy", 1),
+    ],[100,50,30,10,6,3,4,2,1]
+);
+
+const studentofSyzygyLootTable = new LootTable([
+    Item.createItem("Solar Debris", 5),
+    Item.createItem("Solar Debris", 6),
+    Item.createItem("Solar Debris", 7),
+    Item.createItem("Cape of the White Dwarf", 1),
+    Item.createItem("Universal Credit", 3),
+    Item.createItem("Universal Credit", 4),
+    Item.createItem("Cape of the Neutron Star", 1),
+    Item.createItem("Collapse Clasp", 1),
+    Item.createItem("Degenerate Star Tome", 1),
+    ],[50,25,15,5,3,3,2,1,1]
 );

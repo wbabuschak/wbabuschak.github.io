@@ -3,7 +3,9 @@ class Inventory{
         this.items = [];
     }
     addItem(item){
-        // console.log("looted " + item.toString());
+        if (!item){
+            return;
+        }
         for (let i of this.items){
             if (item.name == i.name){
                 i.quantity += item.quantity;
@@ -34,7 +36,7 @@ class Inventory{
 
     load(savedItems){
         this.items = savedItems.map(data =>
-            new Item(data.name, data.quantity, data.equippable, data.desc, data.color)
+            Item.createItem(data.name, data.quantity)
         );
     }
 }

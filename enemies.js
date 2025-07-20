@@ -56,17 +56,17 @@ const ENEMY_DEFS = {
     },
     "Infernal Insect": {
         name: "Infernal Insect",
-        maxHealth: 666,
+        maxHealth: 333,
         lootTable: infernalInsectLootTable
     },
     "Sinful Succubus": {
         name: "Sinful Succubus",
-        maxHealth: 666,
+        maxHealth: 333,
         lootTable: sinfulSuccubusLootTable
     },
     "Fiery Fangtooth": {
         name: "Fiery Fangtooth",
-        maxHealth: 666,
+        maxHealth: 333,
         lootTable: fieryFangtoothLootTable
     },
     "Dreadful Dino": {
@@ -273,6 +273,130 @@ const ENEMY_DEFS = {
         name: "Moon Rock Golem",
         maxHealth: 14241,
         lootTable: moonRockGolemLootTable
+    },
+
+    "Obsidian Sphere": {
+        name: "Obsidian Sphere",
+        maxHealth: 24000,
+        lootTable: obsidianSphereLootTable
+    },
+    "Lava Scorpion": {
+        name: "Lava Scorpion",
+        maxHealth: 26000,
+        lootTable: lavaScorpionLootTable
+    },
+    "Magma Drinker": {
+        name: "Magma Drinker",
+        maxHealth: 29000,
+        lootTable: magmaDrinkerLootTable
+    },
+    "Basalt Golem": {
+        name: "Basalt Golem",
+        maxHealth: 33000,
+        lootTable: basaltGolemLootTable
+    },
+    "Fiery Dreadbeast": {
+        name: "Fiery Dreadbeast",
+        maxHealth: 38000,
+        lootTable: fieryDreadbeastLootTable
+    },
+    "Molten Giant": {
+        name: "Molten Giant",
+        maxHealth: 48000,
+        lootTable: moltenGiantLootTable
+    },
+
+    "Underworld Gangster": {
+        name: "Underworld Gangster",
+        maxHealth: 33600,
+        lootTable: underworldGangsterLootTable
+    },
+    "Subterranean": {
+        name: "Subterranean",
+        maxHealth: 36400,
+        lootTable: subterraneanLootTable
+    },
+    "Alien Pimp": {
+        name: "Alien Pimp",
+        maxHealth: 40600,
+        lootTable: alienPimpLootTable
+    },
+    "Uncompromising Hedonist": {
+        name: "Uncompromising Hedonist",
+        maxHealth: 46200,
+        lootTable: uncompromisingHedonistLootTable
+    },
+    "Veiled Dreadbeast": {
+        name: "Veiled Dreadbeast",
+        maxHealth: 53200,
+        lootTable: veiledDreadbeastLootTable
+    },
+    "Chaos Infiltrator": {
+        name: "Chaos Infiltrator",
+        maxHealth: 67200,
+        lootTable: chaosInfiltratorLootTable
+    },
+
+    "Clanging Mechanotentacle": {
+        name: "Clanging Mechanotentacle",
+        maxHealth: 47040,
+        lootTable: clangingMechanotentacleLootTable
+    },
+    "Razor Spitter": {
+        name: "Razor Spitter",
+        maxHealth: 50960,
+        lootTable: razorSpitterLootTable
+    },
+    "Resurrected Meat-sludge": {
+        name: "Resurrected Meat-sludge",
+        maxHealth: 56840,
+        lootTable: resurrectedMeatSludgeLootTable
+    },
+    "Warped Man": {
+        name: "Warped Man",
+        maxHealth: 64680,
+        lootTable: warpedManLootTable
+    },
+    "Hairy Dreadbeast": {
+        name: "Hairy Dreadbeast",
+        maxHealth: 74480,
+        lootTable: hairyDreadbeastLootTable
+    },
+    "A.M. Plaything": {
+        name: "A.M. Plaything",
+        maxHealth: 94080,
+        lootTable: amPlaythingLootTable
+    },
+
+    "Impact Survivor": {
+        name: "Impact Survivor",
+        maxHealth: 65856,
+        lootTable: impactSurvivorLootTable
+    },
+    "Ion Breather": {
+        name: "Ion Breather",
+        maxHealth: 71344,
+        lootTable: ionBreatherLootTable
+    },
+    "Plasma Junker": {
+        name: "Plasma Junker",
+        maxHealth: 79576,
+        lootTable: plasmaJunkerLootTable
+    },
+    "Post-stellar Screamer": {
+        name: "Post-stellar Screamer",
+        maxHealth: 90552,
+        lootTable: poststellarScreamerLootTable
+    },
+    "Super Dreadbeast": {
+        name: "Super Dreadbeast",
+        maxHealth: 104272,
+        lootTable: superDreadbeastLootTable
+    },
+    "Student of Syzygy": {
+        name: "Student of Syzygy",
+        maxHealth: 131712,
+        lootTable: studentofSyzygyLootTable
     },
 };
 
