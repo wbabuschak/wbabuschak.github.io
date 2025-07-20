@@ -679,15 +679,14 @@ const moltenGiantLootTable = new LootTable([
 // PLEASURE WORLD
 
 const underworldGangsterLootTable = new LootTable([
-    Item.createItem("", 1),
-    Item.createItem("", 2),
-    Item.createItem("", 3),
-    Item.createItem("", 1),
+    Item.createItem("Cloth Scrap", 113),
+    Item.createItem("Cloth Scrap", 135),
+    Item.createItem("Cloth Scrap", 190),
     Item.createItem("Universal Credit", 1),
-    Item.createItem("", 1),
+    Item.createItem("Reworked Goblin Tech", 1),
     Item.createItem("Mysterious Pleasure Juice", 1),
-    Item.createItem("", 1),
-    ],[50,25,15,5,3,2,1,1]
+    Item.createItem("Badass Cloak", 1),
+    ],[50,25,15,3,2,1,1]
 );
 
 const uncompromisingHedonistLootTable = new LootTable([
