@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html>
 <body>
-    <title>EPIC RPG FIGHT GAME v0.0.4c</title>
-    <h1>EPIC RPG FIGHT GAME v0.0.4c</h1>
+    <script>
+        const currentVersion = "v0.0.4d";
+        const savedVersion = localStorage.getItem("gameVersion");
+        if (savedVersion !== currentVersion) {
+            localStorage.setItem("gameVersion", currentVersion);
+            location.reload(true);
+        }
+    </script>
+
+    <title id = "title">EPIC RPG FIGHT GAME</title>
+    <h1 id = "gameTitle">EPIC RPG FIGHT GAME</h1>
+
+    <script>
+        document.getElementById("title").innerHTML += " " + currentVersion;
+        document.getElementById("gameTitle").innerHTML += " " + currentVersion;
+    </script>
     <p>By William Babuschak</p>
     <button id="saveButton">Save Game Data</button>
     <p></p>
@@ -28,11 +42,11 @@
     
     
     <script src="entity.js?v=1.0"></script>
-    <script src="item.js"></script>
-    <script src="loot_table.js"></script>
-    <script src="inventory.js"></script>
-    <script src="loot_tables.js"></script>
-    <script src="enemies.js"></script>
+    <script src="item.js?v=1.0"></script>
+    <script src="loot_table.js?v=1.0"></script>
+    <script src="inventory.js?v=1.0"></script>
+    <script src="loot_tables.js?v=1.0"></script>
+    <script src="enemies.js?v=1.0"></script>
 
     <style>
         #entityDisplay {
