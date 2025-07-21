@@ -266,7 +266,7 @@ class Item{
             case "Badass Cloak":
                 return new Item(name,quantity,"back","30% dmg",RED);
             case "Reworked Goblin Tech":
-                return new Item(name,quantity,"helmet","+0-50 dmg on first attack",RED);
+                return new Item(name,quantity,"head","+0-50 dmg on first attack",RED);
             // A.M. world items
             case "Electric Eye":
                 return new Item(name,quantity,"trinket","+1 dmg every attack, resets after 33",GREEN);
