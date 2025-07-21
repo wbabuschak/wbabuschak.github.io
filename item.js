@@ -2,7 +2,7 @@ const GREEN = "#2b814fff";
 const RED = "#aa2a0aff";
 const DARK_RED = "#6e1b07ff";
 const GRAY = "#686868ff";
-const GOLD = "#a89019ff";
+const GOLD = "#a7901fff";
 const LIGHT_BLUE = "#316db3ff";
 const DARK_BLUE = "#17467cff";
 const PURPLE = "#9a50c5ff";
@@ -191,7 +191,7 @@ class Item{
             case "Arcane Circuitboard":
                 return new Item(name,quantity,"trinket","8% dmg every 3 attacks",RED);
             case "Arcane Iris":
-                return new Item(name,quantity,"amulet","-10% dmg, your attacks that would miss deal 40% dmg",RED);
+                return new Item(name,quantity,"amulet","+5% dmg, your attacks that would miss deal 40% dmg",RED);
             case "Arcane Shield":
                 return new Item(name,quantity,"off-hand","5% dmg, +10% chance to hit",RED);
             case "Arcane Phylactery":
@@ -228,11 +228,14 @@ class Item{
             case "The Obsidian Band":
                 return new Item(name,quantity,"finger","does nothing",DARK_BLUE);
             case "Sulfur Respirator":
-                return new Item(name,quantity,"head","+10 dmg, 2% damage every attack, resets after 6",RED);
+                return new Item(name,quantity,"head","+10 dmg, 6% damage every attack, resets after 6",RED);
             case "Horn of Doom":
                 return new Item(name,quantity,"off-hand","1.06x dmg",DARK_BLUE);
             case "Lava Scorpion Exoskeleton":
-                return new Item(name,quantity,"chest","100% dmg if no head, hands, or feet weapon equipped",RED);
+                return new Item(name,quantity,"chest","100% dmg if no head, hands, or feet item equipped",RED);
+            // case correction for bugged item
+            case "Amulet of Vitrioltic Withering":
+                return new Item("Amulet of Vitriolic Withering",quantity,"amulet","+10% chance to hit every attack, resets after 10",DARK_BLUE);
             case "Amulet of Vitriolic Withering":
                 return new Item(name,quantity,"amulet","+10% chance to hit every attack, resets after 10",DARK_BLUE);
             case "Steps of Worldshaking":
