@@ -398,6 +398,67 @@ const ENEMY_DEFS = {
         maxHealth: 131712,
         lootTable: studentofSyzygyLootTable
     },
+
+    "Echo of Roc": {
+        name: "Echo of Roc",
+        maxHealth: 220000,
+        lootTable: mythEnemyLootTable,
+        armor: 60
+    },
+    "Echo of Medusa": {
+        name: "Echo of Medusa",
+        maxHealth: 240000,
+        lootTable: mythEnemyLootTable,
+        armor: 58
+    },
+    "Echo of Minotaur": {
+        name: "Echo of Minotaur",
+        maxHealth: 260000,
+        lootTable: mythEnemyLootTable,
+        armor: 56
+    },
+    "Echo of Cerberus": {
+        name: "Echo of Cerberus",
+        maxHealth: 280000,
+        lootTable: mythEnemyLootTable,
+        armor: 54
+    },
+    "Echo of Basilisk": {
+        name: "Echo of Basilisk",
+        maxHealth: 300000,
+        lootTable: mythEnemyLootTable,
+        armor: 52
+    },
+    "Echo of Chimera": {
+        name: "Echo of Chimera",
+        maxHealth: 320000,
+        lootTable: mythEnemyLootTable,
+        armor: 50
+    },
+    "Echo of Hydra": {
+        name: "Echo of Hydra",
+        maxHealth: 340000,
+        lootTable: mythEnemyLootTable,
+        armor: 48
+    },
+    "Echo of Kraken": {
+        name: "Echo of Kraken",
+        maxHealth: 340000,
+        lootTable: mythEnemyLootTable,
+        armor: 46
+    },
+    "Echo of Fenrir": {
+        name: "Echo of Fenrir",
+        maxHealth: 360000,
+        lootTable: mythEnemyLootTable,
+        armor: 44
+    },
+    "Echo of Jörmungandr": {
+        name: "Echo of Jörmungandr",
+        maxHealth: 380000,
+        lootTable: mythEnemyLootTable,
+        armor: 42
+    },
 };
 
 function spawnEnemy(enemyName) {

@@ -902,3 +902,18 @@ const studentofSyzygyLootTable = new LootTable([
     Item.createItem("Degenerate Star Tome", 1),
     ],[50,25,15,5,3,3,2,1,1]
 );
+
+// MYTH WORLD
+
+const mythEnemyLootTable = new LootTable([
+    Item.createItem("Myth Essence", 1),
+    Item.createItem("Greater Myth Essence", 1),
+    Item.createItem("Aura Scanner", 1),
+    Item.createItem("Gauntlets of Transcendent Faith", 1),
+    Item.createItem("Shard of Light", 1),
+    Item.createItem("Shard of Darkness", 1),
+    Item.createItem("Symbol of the Trinity", 1),
+    Item.createItem("Singularity of Purpose", 1),
+    Item.createItem("Blazer of the Screaming Eagle", 1),
+    ],[75,15,5,3,2,1,1,1,1,1]
+);

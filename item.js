@@ -42,6 +42,8 @@ class Item{
                 return new Item(name,quantity,null,null,GOLD);
             case "Platinum Coin":
                 return new Item(name,quantity,null,null,GOLD);
+            case "Universal Credit":
+                return new Item(name,quantity,null,null,GOLD);
             case "Token of Faith":
                 return new Item(name,quantity,null,null,LIGHT_BLUE);
             case "Water Jar":
@@ -199,7 +201,7 @@ class Item{
             case "Moon Blasting Super Smashers":
                 return new Item(name,quantity,"hands","base damage is always 40",RED);
             case "Laser Gigawatt Charger":
-                return new Item(name,quantity,"off-hand","30% dmg with laser weapons",GREEN);
+                return new Item(name,quantity,"off-hand","40% dmg with laser weapons",GREEN);
             case "Laser-powered Goblin Smasher":
                 return new Item(name,quantity,"weapon","+22 dmg, 2.00x damage every 3 attacks",RED);
             case "Green Laser Blaster":
@@ -239,7 +241,7 @@ class Item{
             case "Mysterious Pleasure Juice":
                 return new Item(name,quantity,"trinket","0-30% dmg",GREEN);
             case "Ak'lop, Incineration Wand":
-                return new Item(name,quantity,"weapon","+20 dmg + 20% dmg every attack, resets after 10",RED);
+                return new Item(name,quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
             case "Chaos Vambrace":
                 return new Item(name,quantity,"hands","+0-30 dmg",DARK_BLUE);
             case "Chaos Blade":
