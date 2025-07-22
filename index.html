@@ -713,13 +713,14 @@
             enemyAttacks++;
             if (activeEntity.destroyed){
                 if (loot = activeEntity.getLoot(dropCount)){
+                    document.getElementById("lootDisplay").innerHTML = "";
                     for (let item of loot){
                         inventory.addItem(item);
+                        document.getElementById("lootDisplay").innerHTML += "Got: " + item.quantity + "x" + `<span style="color: ${item.color}"> ${item.name}</span>`;
                     }
-                    document.getElementById("lootDisplay").innerHTML = "Got: " + loot[0].quantity + "x" + `<span style="color: ${loot[0].color}"> ${loot[0].name}</span>`;
                     if (textTimer) clearTimeout(textTimer);
                     textTimer = setTimeout(() => {
-                        document.getElementById("lootDisplay").innerHTML = " ";
+                        document.getElementById("lootDisplay").innerHTML = "";
                         textTimer = null;
                     }, 6000);
                 }
