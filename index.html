@@ -2,7 +2,7 @@
 <html>
 <body>
     <script>
-        const currentVersion = "v0.0.5b";
+        const currentVersion = "v0.0.5c";
         const savedVersion = localStorage.getItem("gameVersion");
         if (savedVersion !== currentVersion) {
             localStorage.setItem("gameVersion", currentVersion);
@@ -43,9 +43,9 @@
     
     <script src="entity.js?v=1.0"></script>
     <script src="item.js?v=1.6"></script>
-    <script src="loot_table.js?v=1.1"></script>
+    <script src="loot_table.js?v=1.2"></script>
     <script src="inventory.js?v=1.1"></script>
-    <script src="loot_tables.js?v=1.1"></script>
+    <script src="loot_tables.js?v=1.2"></script>
     <script src="enemies.js?v=1.1"></script>
 
     <style>
@@ -244,9 +244,15 @@
 
             if (universalCredit){
                 if (universalCredit.quantity >= 10) worlds.push(11);
-                if (universalCredit.quantity >= 100) worlds.push(12);
-                if (universalCredit.quantity >= 1000) worlds.push(13);
-                if (universalCredit.quantity >= 10000) worlds.push(14);
+                if (universalCredit.quantity >= 90) worlds.push(12);
+                if (universalCredit.quantity >= 800) worlds.push(13);
+                if (universalCredit.quantity >= 7000) worlds.push(14);
+            }
+
+            let mythItem1 = inventory.items.find(i => i.name == "Perpetual Dynamo");
+            let mythItem2 = inventory.items.find(i => i.name == "Element Collector");
+            if (mythItem1 && mythItem.quantity >= 90 && mythItem2 && mythItem2.quantity >= 9){
+                worlds.push(15);
             }
 
             for (const world of worlds) {

@@ -44,6 +44,8 @@ class Item{
                 return new Item(name,quantity,null,null,GOLD);
             case "Universal Credit":
                 return new Item(name,quantity,null,null,GOLD);
+            case "Perpetual Dynamo":
+                return new Item(name,quantity,null,null,LIGHT_YELLOW);
             case "Token of Faith":
                 return new Item(name,quantity,null,null,LIGHT_BLUE);
             case "Water Jar":
