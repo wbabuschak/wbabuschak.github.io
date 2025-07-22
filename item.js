@@ -245,8 +245,8 @@ class Item{
                 return new Item(name,quantity,"trinket","0-30% dmg",GREEN);
             // case correction for bugged item
             case "Ak'lop, Incineration Wand":
-                return new Item("Ak'olp, Incineration Wand",quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
-            case "Ak'olp, Incineration Wand":
+                return new Item("Ak'Olp, Incineration Wand",quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
+            case "Ak'Olp, Incineration Wand":
                 return new Item(name,quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
             case "Chaos Vambrace":
                 return new Item(name,quantity,"hands","+0-30 dmg",DARK_BLUE);
