@@ -689,6 +689,7 @@
         worldSelect.addEventListener("change", () => {
             worldTimer = 0;
             kills = 0;
+            activeEntity = randomEnemy(Number(worldSelect.value));
         });
 
         window.onload = loadGame;
