@@ -8,7 +8,7 @@ class Entity{
         this.armor = armor;
         this.loot = null;
     }
-    
+
     damage(damage){
         if (this.HP > 0) this.HP-= Math.max(0,damage - this.armor);
          if (this.HP <= 0 && !this.destroyed) {
@@ -17,10 +17,10 @@ class Entity{
          }
     }
 
-    getLoot() {
+    getLoot(drops) {
        if (this.destroyed){
             if (this.lootTable != null) {
-                return this.lootTable.getDrop(1);
+                return this.lootTable.getDrop(drops);
             } else {
                 console.log(this.name + " drops nothing (null loot table)");
                 return [];

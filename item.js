@@ -292,7 +292,7 @@ class Item{
             case "Inexplicable Ribs":
                 return new Item(name,quantity,"chest","60% dmg, 16% chance to miss",DARK_BLUE);
             case "Damaged Exosuit":
-                return new Item(name,quantity,"chest","50% chance to hit after 10 attacks, 100% chance to hit after 20 attacks", RED);
+                return new Item(name,quantity,"chest","+50% chance to hit after 10 attacks, +100% chance to hit after 20 attacks", RED);
             case "Slicing Gloves":
                 return new Item(name,quantity,"hands","base damage is always 100",DARK_BLUE);
             case "Repurposed Digital Gauge":
