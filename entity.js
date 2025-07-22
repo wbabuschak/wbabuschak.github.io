@@ -7,6 +7,7 @@ class Entity{
         this.lootTable = lootTable;
         this.armor = armor;
         this.loot = null;
+        this.xp = Math.max(Math.floor(maxHealth / 100), 1);
     }
 
     damage(damage){

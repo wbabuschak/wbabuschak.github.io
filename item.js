@@ -153,7 +153,7 @@ class Item{
             case "Ring of Greed":
                 return new Item(name,quantity,"finger","40% dmg, miss every 4 attacks",GREEN);
             case "Goblin Ledger":
-                return new Item(name,quantity,"off-hand","1% damage every attack, resets after 12",RED);
+                return new Item(name,quantity,"off-hand","1% damage every attack, resets on 12",RED);
             case "Devious Dagger":
                 return new Item(name,quantity,"weapon","+6 dmg, 16% dmg",GREEN);
             case "Ratkickers":
@@ -230,16 +230,16 @@ class Item{
             case "The Obsidian Band":
                 return new Item(name,quantity,"finger","does nothing",DARK_BLUE);
             case "Sulfur Respirator":
-                return new Item(name,quantity,"head","+10 dmg, 6% damage every attack, resets after 6",RED);
+                return new Item(name,quantity,"head","+10 dmg, 6% damage every attack, resets on 6",RED);
             case "Horn of Doom":
                 return new Item(name,quantity,"off-hand","1.06x dmg",DARK_BLUE);
             case "Lava Scorpion Exoskeleton":
                 return new Item(name,quantity,"chest","100% dmg if no head, hands, or feet item equipped",RED);
             // case correction for bugged item
             case "Amulet of Vitrioltic Withering":
-                return new Item("Amulet of Vitriolic Withering",quantity,"amulet","+10% chance to hit every attack, resets after 10",DARK_BLUE);
+                return new Item("Amulet of Vitriolic Withering",quantity,"amulet","+10% chance to hit every attack, resets on 10",DARK_BLUE);
             case "Amulet of Vitriolic Withering":
-                return new Item(name,quantity,"amulet","+10% chance to hit every attack, resets after 10",DARK_BLUE);
+                return new Item(name,quantity,"amulet","+10% chance to hit every attack, resets on 10",DARK_BLUE);
             case "Steps of Worldshaking":
                 return new Item(name,quantity,"feet","+20 dmg",DARK_BLUE);
             // pleasure world items
@@ -247,9 +247,9 @@ class Item{
                 return new Item(name,quantity,"trinket","0-30% dmg",GREEN);
             // case correction for bugged item
             case "Ak'lop, Incineration Wand":
-                return new Item("Ak'Olp, Incineration Wand",quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
+                return new Item("Ak'Olp, Incineration Wand",quantity,"weapon","+20 dmg & 20% dmg every attack, resets on 10",RED);
             case "Ak'Olp, Incineration Wand":
-                return new Item(name,quantity,"weapon","+20 dmg & 20% dmg every attack, resets after 10",RED);
+                return new Item(name,quantity,"weapon","+20 dmg & 20% dmg every attack, resets on 10",RED);
             case "Chaos Vambrace":
                 return new Item(name,quantity,"hands","+0-30 dmg",DARK_BLUE);
             case "Chaos Blade":
@@ -257,7 +257,7 @@ class Item{
             case "Cape of Cunning":
                 return new Item(name,quantity,"back","1.2x dmg on first attack",DARK_BLUE);
             case "Overtuned Grippers":
-                return new Item(name,quantity,"hands","60% dmg, -10% every attack, resets after 6",RED);
+                return new Item(name,quantity,"hands","60% dmg, -10% every attack, resets on 6",RED);
             case "Flesh Den Entry Token":
                 return new Item(name,quantity,"trinket","+6 dmg, +9% chance to hit",DARK_BLUE);
             case "Dual-purpose Cane":
@@ -274,7 +274,7 @@ class Item{
                 return new Item(name,quantity,"head","+0-50 dmg on first attack",RED);
             // A.M. world items
             case "Electric Eye":
-                return new Item(name,quantity,"trinket","+1 dmg every attack, resets after 33",GREEN);
+                return new Item(name,quantity,"trinket","+1 dmg every attack, resets on 33",GREEN);
             case "Gar'Ahan, Fleshstripper":
                 return new Item(name,quantity,"weapon","+300 dmg, 150% chance to miss",RED);
             case "Tabis of Inexorable Torment":
@@ -317,7 +317,7 @@ class Item{
             case "Degenerate Star Belt":
                 return new Item(name,quantity,"waist","+30 dmg for each degenerate star item, deal 2.00x dmg on the third of every 5 attacks",RED);
             case "Anti-matter Aegis":
-                return new Item(name,quantity,"off-hand","+10 dmg every attack, resets after 4",DARK_BLUE);
+                return new Item(name,quantity,"off-hand","+10 dmg every attack, resets on 4",DARK_BLUE);
             case "Degenerate Star Hood":
                 return new Item(name,quantity,"head","+30 dmg for each degenerate star item, deal 2.00x dmg on the fourth of every 5 attacks", RED);
             case "Ion Chimes":
@@ -325,7 +325,7 @@ class Item{
             case "Degenerate Star Coat":
                 return new Item(name,quantity,"chest","+30 dmg for each degenerate star item, deal 2.00x dmg on the fifth of every 5 attacks",RED);
             case "Stolen Hope":
-                return new Item(name,quantity,"trinket","1% dmg every attack, resets after 50 attacks",RED);
+                return new Item(name,quantity,"trinket","1% dmg every attack, resets on 50 attacks",RED);
             default:
                 return new Item(name,quantity);
         }
