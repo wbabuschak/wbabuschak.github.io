@@ -291,7 +291,7 @@
 
             let mythItem1 = inventory.items.find(i => i.name == "Perpetual Dynamo");
             let mythItem2 = inventory.items.find(i => i.name == "Element Collector");
-            if (mythItem1 && mythItem.quantity >= 90 && mythItem2 && mythItem2.quantity >= 9){
+            if (mythItem1 && mythItem1.quantity >= 90 && mythItem2 && mythItem2.quantity >= 9){
                 dropCount = 2;
                 worlds.push(15);
             }
