@@ -1,11 +1,39 @@
-<button onclick="migrateSaveToClickerGame()">PLAY EPIC RPG FIGHT GAME</button>
+<link rel="icon" href="icon.png" type="image/png">
+<head>
+    <style>
+        body {
+            background-color: bisque;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<title>wbabuschak.github.io</title>
+<h1>wbabuschak.github.io</h1>
+<h2>Host to many awesome web projects (and more in the future)</h2>
+<div class="clicker-game" style="background-color: lightcoral; padding: 8px; border-radius: 16px; margin: 16px; width: 33vw" >
+    <h3>CLICKER GAME</h3>
+    <p>EPIC RPG FIGHT GAME has moved locations! Migrate your sava data now and continue playing by pressing the button below!</p>
+    <button onclick="migrateSaveToClickerGame()">PLAY EPIC RPG FIGHT GAME</button>
+</div>
+
 
 <script>
     function migrateSaveToClickerGame() {
-    const saveData = localStorage.getItem("gameSave");
-    if (saveData) {
-        localStorage.setItem("clickerGameSave", saveData);
+        const saveData = localStorage.getItem("gameSave");
+        if (saveData) {
+            localStorage.setItem("clickerGameSave", saveData);
+        }
+        location.href = "CLICKER-GAME/";
     }
-    location.href = "CLICKER-GAME/";
-}
 </script>
+
+
+<div class="idle-game-2" style="background-color: azure; padding: 8px; border-radius: 16px; margin: 16px; width: 33vw;">
+    <h3>WIP Idle Game 2</h3>
+    <p>This game is still too early development to share! You can click the button as much as you want, but it won't do anything.</p>
+    <button>PLAY Idle Game 2</button>
+</div>
+
+
