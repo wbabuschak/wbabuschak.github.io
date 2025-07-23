@@ -459,6 +459,13 @@ const ENEMY_DEFS = {
         lootTable: mythEnemyLootTable,
         armor: 142
     },
+
+    "Echo of Jörmungandr": {
+        name: "Echo of Jörmungandr",
+        maxHealth: 380000,
+        lootTable: mythEnemyLootTable,
+        armor: 142
+    },
 };
 
 function spawnEnemy(enemyName) {
