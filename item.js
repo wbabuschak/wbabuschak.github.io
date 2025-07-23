@@ -8,6 +8,8 @@ const DARK_BLUE = "#17467cff";
 const PURPLE = "#9a50c5ff";
 const LIGHT_PURPLE = "#c392dfff";
 const LIGHT_YELLOW = "#e7c818ff";
+const LIGHT_GREEN = "#4e9b36ff";
+const HOT_PINK = "#c432bcff";
 
 class Item{
 
@@ -46,6 +48,10 @@ class Item{
                 return new Item(name,quantity,null,null,GOLD);
             case "Perpetual Dynamo":
                 return new Item(name,quantity,null,null,LIGHT_YELLOW);
+            case "Element Collector":
+                return new Item(name,quantity,null,null,LIGHT_YELLOW);
+            case "Greater Myth Essence":
+                return new Item(name,quantity,null,null,LIGHT_GREEN);
             case "Token of Faith":
                 return new Item(name,quantity,null,null,LIGHT_BLUE);
             case "Water Jar":
@@ -299,7 +305,7 @@ class Item{
                 return new Item(name,quantity,"finger","0.1% dmg for each Dreadbeast Trophy, up to 40%",RED);
             case "Strangler Mitts":
                 return new Item(name,quantity,"hands","attacks without a weapon can't miss",RED);
-             // stellar remnant world items
+            // stellar remnant world items
             case "Collapse Clasp":
                 return new Item(name,quantity,"waist","30% dmg",GREEN);
             case "Degenerate Star Tome":
@@ -326,6 +332,54 @@ class Item{
                 return new Item(name,quantity,"chest","+30 dmg for each degenerate star item, deal 2.00x dmg on the fifth of every 5 attacks",RED);
             case "Stolen Hope":
                 return new Item(name,quantity,"trinket","1% dmg every attack, resets on 50 attacks",RED);
+            // myth world items
+            case "Aura Scanner":
+                return new Item(name,quantity,"off-hand","+20 armor break",GREEN);
+            case "Gauntlets of Transcendent Faith":
+                return new Item(name,quantity,"hands","your attacks have a 50% chance to break 50% of armor",DARK_BLUE);
+            case "Shard of Light":
+                return new Item(name,quantity,"finger","+50 dmg, doubles effect of Shard of Darkness",DARK_BLUE);
+            case "Shard of Darkness":
+                return new Item(name,quantity,"amulet","30% dmg, +18% chance to hit",RED);
+            case "Symbol of Trinity":
+                return new Item(name,quantity,"trinket","33% dmg every attack, resets on 3 attacks",RED);
+            case "Singularity of Purpose":
+                return new Item(name,quantity,"weapon","+1000 dmg, -100 dmg for each item equipped",RED);
+            case "Blazer of the Screaming Eagle":
+                return new Item(name,quantity,"chest","+20 armor break, 2.00x armor break",RED);
+            // default world part 3, part 4 + desert world part 2 items
+            case "God Cinch":
+                return new Item(name,quantity,"waist","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "God Bulwark":
+                return new Item(name,quantity,"off-hand","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "God Helm":
+                return new Item(name,quantity,"head","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "God Cape":
+                return new Item(name,quantity,"back","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "God Plate":
+                return new Item(name,quantity,"chest","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "God Gloves":
+                return new Item(name,quantity,"hands","200% dmg, 50% chance to miss, 18% dmg + 10% chance to hit per God item",HOT_PINK);
+            case "Spiral Augment":
+                return new Item(name,quantity,"augment","-20 dmg, +20 armor break",DARK_BLUE);
+            case "Critical Augment":
+                return new Item(name,quantity,"augment","% dmg equal to your miss chance",DARK_BLUE);
+            case "Charging Augment":
+                return new Item(name,quantity,"augment","20% chance to miss, your attacks that would miss deal 50% dmg",DARK_BLUE);
+            case "Flaring Augment":
+                return new Item(name,quantity,"augment","-400% dmg, 2500% dmg every 5 attacks",DARK_BLUE);
+            case "Chaos Emerald":
+                return new Item(name,quantity,"finger","100% dmg if wearing the Order Sapphire",RED);
+            case "Balance Ruby":
+                return new Item(name,quantity,"amulet","100% dmg if wearing the Chaos Emerald",RED);
+            case "Order Sapphire":
+                return new Item(name,quantity,"trinket","100% dmg if wearing the Balance Ruby",RED);
+            case "Truesilver Greathammer":
+                return new Item(name,quantity,"weapon","+800 dmg, 400% dmg, 200 armor break, 2.00x armor break",RED);
+            case "Truesilver Greataxe":
+                return new Item(name,quantity,"weapon","+700 dmg, 350% dmg, 300 armor break, 2.50x armor break",RED);
+            case "Truesilver Greatsword":
+                return new Item(name,quantity,"weapon","+600 dmg, 300% dmg, 400 armor break, 3.00x armor break",RED);
             default:
                 return new Item(name,quantity);
         }

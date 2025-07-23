@@ -5,7 +5,7 @@
 
     <div id="left-content" style="flex-grow: 1; max-width: 15%;">
         <script>
-            const currentVersion = "v0.0.5d";
+            const currentVersion = "v0.0.6";
             const savedVersion = localStorage.getItem("gameVersion");
             if (savedVersion !== currentVersion) {
                 localStorage.setItem("gameVersion", currentVersion);
@@ -21,13 +21,14 @@
             document.getElementById("gameTitle").innerHTML += " " + currentVersion;
         </script>
         <p>By William Babuschak</p>
-
-
+        <h2>Volume</h2>
+        <input type="range" id="volumeSlider" min="0" max="100" value="50"></input>
+        <p></p>
         <div id="xpContainer" style="width: 300px; height: 25px; background: #ffffff; overflow: hidden; box-shadow: inset 0 0 2px #000;">
         <div id="xpBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #1649b8ff, #a6b4d3ff); transition: width 0.3s ease;"></div>
         </div>
 
-        <p id="xpText">Level 0 XP: 0 / 0</p>
+        <p id="xpText">Level: 0 XP: 0 / 0</p>
 
 
         <button id="saveButton">Save Game Data</button>
@@ -114,6 +115,13 @@
     </style>
 
     <script>
+        const worldMusic = {
+            0: "music/Live-Today.wav",
+            1: "music/Wasted-Time.wav",
+            2: "music/Thinking-Of-You.wav",
+            7: "music/Overdose.wav",
+        }
+
         let activeEntity;
         let inventory = new Inventory;
         let equipped = [];
@@ -124,6 +132,8 @@
         let lastHits = [];
         let kills = 0;
         let dropCount = 1;
+        let music = false;
+        let volume;
 
         let precomputedDamage = {
             baseDmg: 1,
@@ -140,7 +150,7 @@
         let level = 0;
 
         function gainExperience(exp){
-            experience += exp;
+            if (exp > level) experience += exp;
             let xp_to_level = 2 * (1 + level) * (1 + level) * (20 + level);
             
             while (experience >= xp_to_level){
@@ -150,7 +160,7 @@
                 xp_to_level = 2 * (1 + level) * (1 + level) * (20 + level);
             }
             document.getElementById("xpBar").style.width = (100 * experience / xp_to_level) + '%';
-            document.getElementById("xpText").innerHTML =`Level ${level}<br>XP: ${experience } / ${xp_to_level}`;
+            document.getElementById("xpText").innerHTML =`Level: ${level}<br>XP: ${experience } / ${xp_to_level}`;
         }
 
         gainExperience(0);
@@ -283,16 +293,16 @@
             let universalCredit = inventory.items.find(i => i.name == "Universal Credit");
 
             if (universalCredit){
-                if (universalCredit.quantity >= 10) worlds.push(11);
-                if (universalCredit.quantity >= 90) worlds.push(12);
-                if (universalCredit.quantity >= 800) worlds.push(13);
-                if (universalCredit.quantity >= 7000) worlds.push(14);
+                if (universalCredit.quantity >= 1) worlds.push(11);
+                if (universalCredit.quantity >= 10) worlds.push(12);
+                if (universalCredit.quantity >= 100) worlds.push(13);
+                if (universalCredit.quantity >= 1000) worlds.push(14);
             }
 
             let mythItem1 = inventory.items.find(i => i.name == "Perpetual Dynamo");
             let mythItem2 = inventory.items.find(i => i.name == "Element Collector");
-            if (mythItem1 && mythItem1.quantity >= 90 && mythItem2 && mythItem2.quantity >= 9){
-                dropCount = 2;
+            if (mythItem1 && mythItem1.quantity >= 15 && mythItem2 && mythItem2.quantity >= 3){
+                if (dropCount < 2) dropCount = 2;
                 worlds.push(15);
             }
 
@@ -641,6 +651,21 @@
                     dmg_mult += 0.56;
                     miss_chance += 0.14;
                 }
+                if (i.name == "Shard of Light"){
+                    dmg += 50;
+                    if (itemEquipped("Shard of Darkness")){
+                        dmg_mult += 0.30;
+                        miss_chance -= 0.18;
+                    }
+                }
+                if (i.name == "Shard of Darkness"){
+                    dmg_mult += 0.30;
+                    miss_chance -= 0.18;
+                }
+                if (i.name == "Singularity of Purpose"){
+                    dmg += 1000;
+                    dmg -= 100 * equipped.length;
+                }
                 
             }
 
@@ -679,6 +704,9 @@
             "A.M. World",
             "Stellar Remnant World",
             "Myth World",
+            "Default World (Part 3)",
+            "Default World (Part 4)",
+            "Desert World (Part 2)",
             ];
             return worlds[i];
         }
@@ -698,6 +726,7 @@
                 equipped: equipped,
                 level: level,
                 xp: experience,
+                volume: volume,
             };
             localStorage.setItem("gameSave", JSON.stringify(saveData));
         }
@@ -716,6 +745,9 @@
                 level = savedData.level || 0;
                 experience = 0;
                 gainExperience(savedData.xp || 0);
+
+                volume = savedData.volume || 50;
+                document.getElementById("volumeSlider").value = volume;
             } else {
                 inventory = new Inventory();
             }
@@ -724,6 +756,7 @@
             updateWorldSelect();
             computeLoadoutStats();
         }
+        
 
         let worldTimer = 0;
         setInterval(() => {
@@ -731,13 +764,35 @@
             let alert_message = `You have been in ${worldName(worldSelect.value)} for ${worldTimer} seconds (${Math.floor((kills/worldTimer)*60*60)} kills/h)`;
             document.getElementById("worldTimer").textContent = alert_message;
         }, 1000);
-
         document.getElementById("worldTimer").textContent = "You have been in Default World for 1 seconds";
+
+        const musicPlayer = new Audio();
+        musicPlayer.loop = true;
+        function playMusic(){
+            musicPlayer.pause();
+            if (worldMusic[worldSelect.value]) {
+                musicPlayer.src = worldMusic[worldSelect.value];
+                musicPlayer.currentTime = 0;
+                musicPlayer.play();
+            }
+            
+        }
+
         worldSelect.addEventListener("change", () => {
             worldTimer = 0;
             kills = 0;
             activeEntity = randomEnemy(Number(worldSelect.value));
+            playMusic();
         });
+
+        musicPlayer.onerror = (e) => {
+            console.error("Audio playback error", e);
+        };
+
+        document.getElementById("volumeSlider").addEventListener("change", () => {
+            volume = document.getElementById("volumeSlider").value;
+            musicPlayer.volume = volume / 100.0;
+        })
 
         window.onload = loadGame;
         window.onbeforeunload = saveGame;
@@ -746,6 +801,8 @@
         updateInventory();
         updateEquipped();
         updateWorldSelect();
+        playMusic();
+        musicPlayer.volume = volume / 100.0;
     </script>
 
     <script>
@@ -781,6 +838,10 @@
         // attack button logic
         document.getElementById("attackButton").addEventListener("click", () => {
             hit();
+            if (!music){
+                music = true;
+                playMusic();
+            }
         });
     </script>
 
@@ -817,7 +878,8 @@
         function attackDamage(){
             let { baseDmg, dmgMult, moreMult, missChance, missMult } = precomputedDamage;
             let dmg = baseDmg;
-            
+            let armorbreak = 0;
+            let armorBreakMod = 1.00;
             // item procs
             for (let i of equipped){
                 if (i.name == "Stormstrike"){
@@ -973,12 +1035,27 @@
                 if (i.name == "Amulet of Vitriolic Withering"){
                     missChance -= 0.10 * (attackCount % 10);
                 }
+                if (i.name == "Aura Scanner"){
+                    armorBreak += 20;
+                }
+                if (i.name == "Blazer of the Screaming Eagle"){
+                    armorBreak += 20;
+                    armorBreakMod += 1.00;
+                }
+                if (i.name == "Gauntlets of Transcendent Faith"){
+                    if (Math.random() > 0.75){
+                        armorBreak += 0.5 * activeEntity.armor;
+                    }
+                }
+                if (i.name == "Symbol of Trinity"){
+                    dmgMult += 0.33 * (attackCount % 3);
+                }
             }
 
             let miss = Math.random() < missChance;
             if (miss) dmg *= missMult;
 
-            return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmgMult) * Math.max(0.0, moreMult));
+            return Math.floor(Math.max(0, dmg) * Math.max(0.0, dmgMult) * Math.max(0.0, moreMult) + Math.min(Math.max(0.0, armorBreak) * Math.max(0.0, armorBreakMod), activeEntity.armor));
         }
 
         
@@ -1125,6 +1202,25 @@
                     enemies.push(spawnEnemy("Echo of Fenrir"));
                     enemies.push(spawnEnemy("Echo of Jörmungandr"));
                     worldColor = "#ccbea3ff"
+                    break;
+                case 16:
+                    enemies.push(spawnEnemy("Rare Vandal"));
+                    enemies.push(spawnEnemy("Nasty Goblin"));
+                    enemies.push(spawnEnemy("Werewolf"));
+                    worldColor = "rgba(163, 196, 148, 1)"
+                    break;
+                case 17:
+                    enemies.push(spawnEnemy("Epic Footpad"));
+                    enemies.push(spawnEnemy("Putrid Goblin"));
+                    enemies.push(spawnEnemy("Werebear"));
+                    worldColor = "rgba(151, 202, 127, 1)"
+                    break;
+                case 18:
+                    enemies.push(spawnEnemy("Spooky Desert Geist"));
+                    enemies.push(spawnEnemy("Acid Spitter"));
+                    enemies.push(spawnEnemy("Obssessed Desert Fanatic"));
+                    enemies.push(spawnEnemy("Overclocked Sandstone Golem"));
+                    worldColor = "#ffde96ff"
                     break;
                 default:
                     enemies.push(spawnEnemy("Dirty Goblin"));

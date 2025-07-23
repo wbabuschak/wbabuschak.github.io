@@ -403,61 +403,61 @@ const ENEMY_DEFS = {
         name: "Echo of Roc",
         maxHealth: 220000,
         lootTable: mythEnemyLootTable,
-        armor: 60
+        armor: 160
     },
     "Echo of Medusa": {
         name: "Echo of Medusa",
         maxHealth: 240000,
         lootTable: mythEnemyLootTable,
-        armor: 58
+        armor: 158
     },
     "Echo of Minotaur": {
         name: "Echo of Minotaur",
         maxHealth: 260000,
         lootTable: mythEnemyLootTable,
-        armor: 56
+        armor: 156
     },
     "Echo of Cerberus": {
         name: "Echo of Cerberus",
         maxHealth: 280000,
         lootTable: mythEnemyLootTable,
-        armor: 54
+        armor: 154
     },
     "Echo of Basilisk": {
         name: "Echo of Basilisk",
         maxHealth: 300000,
         lootTable: mythEnemyLootTable,
-        armor: 52
+        armor: 152
     },
     "Echo of Chimera": {
         name: "Echo of Chimera",
         maxHealth: 320000,
         lootTable: mythEnemyLootTable,
-        armor: 50
+        armor: 150
     },
     "Echo of Hydra": {
         name: "Echo of Hydra",
         maxHealth: 340000,
         lootTable: mythEnemyLootTable,
-        armor: 48
+        armor: 148
     },
     "Echo of Kraken": {
         name: "Echo of Kraken",
         maxHealth: 340000,
         lootTable: mythEnemyLootTable,
-        armor: 46
+        armor: 146
     },
     "Echo of Fenrir": {
         name: "Echo of Fenrir",
         maxHealth: 360000,
         lootTable: mythEnemyLootTable,
-        armor: 44
+        armor: 144
     },
     "Echo of Jörmungandr": {
         name: "Echo of Jörmungandr",
         maxHealth: 380000,
         lootTable: mythEnemyLootTable,
-        armor: 42
+        armor: 142
     },
 };
 

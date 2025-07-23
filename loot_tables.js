@@ -917,3 +917,48 @@ const mythEnemyLootTable = new LootTable([
     Item.createItem("Blazer of the Screaming Eagle", 1),
     ],[75,15,5,3,2,1,1,1,1,1]
 );
+
+// DEFAULT WORLD PART 3
+
+const defaultWorldPartThreeEnemyLootTable = new LootTable([
+    Item.createItem("Life Essence", 1),
+    Item.createItem("God Cinch", 1),
+    Item.createItem("Chaos Emerald", 1),
+    Item.createItem("God Bulwark", 1),
+    Item.createItem("God Helm", 1),
+    Item.createItem("Spiral Augment", 1),
+    Item.createItem("Critical Augment", 1),
+    Item.createItem("Charging Augment", 1),
+    Item.createItem("Flaring Augment", 1),
+    ],[200,1,1,1,1,2,2,2,2]
+);
+
+// DEFAULT WORLD PART 4
+
+const defaultWorldPartFourEnemyLootTable = new LootTable([
+    Item.createItem("Life Essence", 1),
+    Item.createItem("God Plate", 1),
+    Item.createItem("Balance Ruby", 1),
+    Item.createItem("God Cape", 1),
+    Item.createItem("God Gloves", 1),
+    Item.createItem("Spiral Augment", 1),
+    Item.createItem("Critical Augment", 1),
+    Item.createItem("Charging Augment", 1), 
+    Item.createItem("Flaring Augment", 1),
+    ],[200,1,1,1,1,2,2,2,2]
+);
+
+// DESERT WORLD PART 2
+
+const desertWorldPartTwoEnemyLootTable = new LootTable([
+    Item.createItem("Life Essence", 1),
+    Item.createItem("Truesilver Greathammer", 1),
+    Item.createItem("Order Sapphire", 1),
+    Item.createItem("Truesilver Greataxe", 1),
+    Item.createItem("Truesilver Greatsword", 1),
+    Item.createItem("Spiral Augment", 1),
+    Item.createItem("Critical Augment", 1),
+    Item.createItem("Charging Augment", 1),
+    Item.createItem("Flaring Augment", 1),
+    ],[200,1,1,1,1,2,2,2,2]
+);
