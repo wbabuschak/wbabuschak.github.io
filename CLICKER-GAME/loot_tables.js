@@ -912,7 +912,7 @@ const mythEnemyLootTable = new LootTable([
     Item.createItem("Gauntlets of Transcendent Faith", 1),
     Item.createItem("Shard of Light", 1),
     Item.createItem("Shard of Darkness", 1),
-    Item.createItem("Symbol of the Trinity", 1),
+    Item.createItem("Symbol of Trinity", 1),
     Item.createItem("Singularity of Purpose", 1),
     Item.createItem("Blazer of the Screaming Eagle", 1),
     ],[75,15,5,3,2,1,1,1,1,1]

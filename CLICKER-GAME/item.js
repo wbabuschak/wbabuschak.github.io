@@ -341,6 +341,9 @@ class Item{
                 return new Item(name,quantity,"finger","+50 dmg, doubles effect of Shard of Darkness",DARK_BLUE);
             case "Shard of Darkness":
                 return new Item(name,quantity,"amulet","30% dmg, +18% chance to hit",RED);
+            // case corretion for bugged item
+            case "Symbol of the Trinity":
+                return new Item("Symbol of Trinity",quantity,"trinket","33% dmg every attack, resets on 3 attacks",RED);
             case "Symbol of Trinity":
                 return new Item(name,quantity,"trinket","33% dmg every attack, resets on 3 attacks",RED);
             case "Singularity of Purpose":
