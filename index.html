@@ -43,6 +43,7 @@
             const saveData = localStorage.getItem("gameSave");
             if (saveData) {
                 localStorage.setItem("clickerGameSave", saveData);
+                localStorage.removeItem("gameSave");
             }
             location.href = "CLICKER-GAME/";
         }
