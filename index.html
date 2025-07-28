@@ -22,17 +22,18 @@
     justify-items: stretch;
     padding: 0;
     width: 96vw;
+    color:aliceblue
 ">
 
-    <div class="clicker-game" style="background-color: lightcoral; padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%" >
+    <div style="background-color: rgba(156, 0, 0, 1); padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%" >
         <h3>EPIC RPG FIGHT GAME</h3>
-        <p>EPIC RPG FIGHT GAME has moved locations! Migrate your sava data now and continue playing by pressing the button below!</p>
+        <p>Slay monsters. Find loot. Explore new worlds. Repeat.</p>
         <button onclick="navigate(0)">PLAY EPIC RPG FIGHT GAME</button>
     </div>
 
-    <div class="idle-game-2" style="background-color: azure; padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%;">
+    <div style="background-color: rgba(0, 97, 5, 1); padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%;">
         <h3>Plague Lands: Undertaker Empire</h3>
-        <p>This game is very early in development.</p>
+        <p>Collect corpses. Bury them deep. Earn Cash. Grow your empire.</p>
         <button onclick="navigate(1)">PLAY Plague Lands: Undertaker Empire</button>
     </div>
 
@@ -43,8 +44,10 @@
             switch (i){
                 case 0:
                     location.href = "ERPGFG/";
+                    break;
                 case 1:
                     location.href = "Plague-Lands-Undertaker-Empire/";
+                    break;
                 default:
                     alert("You are trying to navigate to a subdirectory that doesn't exist.");
             }
