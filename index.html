@@ -27,24 +27,26 @@
     <div class="clicker-game" style="background-color: lightcoral; padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%" >
         <h3>EPIC RPG FIGHT GAME</h3>
         <p>EPIC RPG FIGHT GAME has moved locations! Migrate your sava data now and continue playing by pressing the button below!</p>
-        <button onclick="migrateSaveToClickerGame()">PLAY EPIC RPG FIGHT GAME</button>
+        <button onclick="navigate(0)">PLAY EPIC RPG FIGHT GAME</button>
     </div>
 
     <div class="idle-game-2" style="background-color: azure; padding: 1vw; border-radius: 1vw; margin: 1vw 0; width: 100%;">
-        <h3>WIP Idle Game 2</h3>
-        <p>This game is still too early in development to share! You can click the button as much as you want, but it won't do anything.</p>
-        <button>PLAY Idle Game 2</button>
+        <h3>Plague Lands: Undertaker Empire</h3>
+        <p>This game is very early in development.</p>
+        <button onclick="navigate(1)">PLAY Plague Lands: Undertaker Empire</button>
     </div>
 
 </div>
 
     <script>
-        function migrateSaveToClickerGame() {
-            const saveData = localStorage.getItem("gameSave");
-            if (saveData) {
-                localStorage.setItem("clickerGameSave", saveData);
-                localStorage.removeItem("gameSave");
+        function navigate(i){
+            switch (i){
+                case 0:
+                    location.href("ERPGFG/");
+                case 1:
+                    location.href("Plague-Lands-Undertaker-Empire/");
+                default:
+                    alert("You are trying to navigate to a subdirectory that doesn't exist.");
             }
-            location.href = "CLICKER-GAME/";
         }
     </script>
